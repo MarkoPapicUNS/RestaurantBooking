@@ -25,28 +25,21 @@ namespace RestaurantBooking.API
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-            var issuer = "https://localhost:44300";
-            var audience = "ab9da96ebf4c411eacdbc22b552724ed";
-            var secret = TextEncodings.Base64Url.Decode("5G_lU3zvKNcEE6EK_bKNoQBhNGSOHnvYdg5K7jMazFU");
+            var issuer = System.Configuration.ConfigurationManager.AppSettings["TokenIssuer"]; //"https://localhost:44300";
+            var audience = new List<string> {"ab9da96ebf4c411eacdbc22b552724ed"}; //TODO: move this to database or something like that
+            var secret = TextEncodings.Base64Url.Decode(System.Configuration.ConfigurationManager.AppSettings["AppSecret"]);
 
             // Api controllers with an [Authorize] attribute will be validated with JWT
             app.UseJwtBearerAuthentication(
                 new JwtBearerAuthenticationOptions
                 {
                     AuthenticationMode = AuthenticationMode.Active,
-                    AllowedAudiences = new[] { audience },
+                    AllowedAudiences = audience,
                     IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                     {
                         new SymmetricKeyIssuerSecurityTokenProvider(issuer, secret)
                     },
-                    Provider = new OAuthBearerAuthenticationProvider
-                    {
-                        OnValidateIdentity = context =>
-                        {
-                            context.Ticket.Identity.AddClaim(new System.Security.Claims.Claim("newCustomClaim", "newValue"));
-                            return Task.FromResult<object>(null);
-                        }
-                    }
+                    Provider = new OAuthBearerAuthenticationProvider()
                 });
         }
     }
