@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.GuestRestaurant
+namespace Shared
 {
-    public class Class1
+    enum LogMessageType
     {
+        Notification = 0,
+        Warning,
+        Error
     }
 }

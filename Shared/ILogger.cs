@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Guest.Domain
+namespace Shared
 {
-    public class Class1
+    interface ILogger
     {
+        void Log(LogMessageType messageType, string message, DateTime time);
     }
 }

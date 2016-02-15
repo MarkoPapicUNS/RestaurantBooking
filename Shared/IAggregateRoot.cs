@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Class1
+    public interface IAggregateRoot
     {
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CAD2A54D-D734-47C2-801C-DE790A1E4A56}</ProjectGuid>
+    <ProjectGuid>{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shared.GuestRestaurant</RootNamespace>
-    <AssemblyName>Shared.GuestRestaurant</AssemblyName>
+    <RootNamespace>ApplicationServices</RootNamespace>
+    <AssemblyName>ApplicationServices</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,7 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\FriendshipAdapter.cs" />
+    <Compile Include="Adapters\IFriendshipAdapter.cs" />
+    <Compile Include="Dtos\ActionResultDto.cs" />
+    <Compile Include="Dtos\FriendshipDto.cs" />
+    <Compile Include="FriendshipService.cs" />
+    <Compile Include="IFriendshipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Guest.Domain\Guest.Domain.csproj">
+      <Project>{F501F383-D2CD-4A0C-8406-561B5B118B7E}</Project>
+      <Name>Guest.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Guest.Services\Guest.Services.csproj">
+      <Project>{68157F57-66F3-4547-A5FD-49357D429F50}</Project>
+      <Name>Guest.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

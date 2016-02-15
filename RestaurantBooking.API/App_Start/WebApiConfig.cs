@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using AppBuilder;
 
 namespace RestaurantBooking.API
 {
@@ -19,6 +17,8 @@ namespace RestaurantBooking.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.DependencyResolver = InversionOfControlManager.GetDependencyResolver();
         }
     }
 }
