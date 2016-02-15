@@ -42,9 +42,19 @@ namespace Guest.Repositories
             return _context.Frendships;
         }
 
+        public void DeleteFriendship(Friendship item)
+        {
+            _context.Frendships.Remove(item);
+        }
+
         public void Insert(Domain.Guest item)
         {
             _context.Guests.Add(item);
+        }
+
+        public void Delete(Domain.Guest item)
+        {
+            _context.Guests.Remove(item);
         }
 
         public void Commit()

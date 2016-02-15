@@ -85,5 +85,20 @@ namespace Guest.Services
             var friendsUsernames = respondersUsernames.Union(requesterUsernames);
             return _repository.All().Where(g => friendsUsernames.Contains(g.Username));
         }
+
+        public void RemoveFriendship(string username, string friendUsername)
+        {
+            if (username == null)
+                throw new ArgumentNullException("username");
+
+            var friendship =
+                _repository.GetFriendships()
+                    .FirstOrDefault(
+                        f =>
+                            f.RequesterUsername == username && f.ResponderUsername == friendUsername ||
+                            f.RequesterUsername == friendUsername && f.ResponderUsername == username);
+            _repository.DeleteFriendship(friendship);
+            _repository.Commit();
+        }
     }
 }

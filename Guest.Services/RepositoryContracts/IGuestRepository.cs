@@ -12,5 +12,6 @@ namespace Guest.Services.RepositoryContracts
     {
         Friendship GetFriendship(string requesterUsername, string responderUsername);
         IQueryable<Friendship> GetFriendships();
+        void DeleteFriendship(Friendship item);
     }
 }

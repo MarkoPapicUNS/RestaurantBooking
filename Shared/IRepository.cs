@@ -11,6 +11,7 @@ namespace Shared
         IQueryable<TAggregate> All();
         TAggregate Find(TKey id);
         void Insert(TAggregate item);
+        void Delete(TAggregate item);
         void Commit();
     }
 }

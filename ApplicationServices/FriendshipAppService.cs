@@ -77,5 +77,28 @@ namespace ApplicationServices
             var friends = _friendshipService.GetFriends(username);
             return friends.Select(f => _adapter.AdaptFriend(f));
         }
+
+        public ActionResultDto RemoveFriendship(string username, string friendUsername)
+        {
+            ActionResultDto result;
+            try
+            {
+                _friendshipService.RemoveFriendship(username, friendUsername);
+                result = new ActionResultDto
+                {
+                    IsSuccess = true,
+                    Message = string.Format("{0} is removed friends.", friendUsername)
+                };
+            }
+            catch (Exception e)
+            {
+                result = new ActionResultDto
+                {
+                    IsSuccess = false,
+                    Message = "Unable to perform this request."
+                };
+            }
+            return result;
+        }
     }
 }

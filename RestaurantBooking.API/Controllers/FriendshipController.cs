@@ -92,7 +92,6 @@ namespace RestaurantBooking.API.Controllers
             return Ok(friendships);
         }
 
-        [HttpPost]
         [Route("api/friendship/sendfriendrequest")]
         public IHttpActionResult SendFriendRequest([FromBody] string recipientUsername)
         {
@@ -104,6 +103,19 @@ namespace RestaurantBooking.API.Controllers
             if (result.IsSuccess)
                 return Created(Url.Link("FriendshipRoute", new {responderUsername = recipientUsername}), result.Message);
             return BadRequest(result.Message);
+        }
+
+        [Route("api/friendship/removefriend")]
+        public IHttpActionResult RemoveFriend([FromBody] string friendUsername)
+        {
+            if (string.IsNullOrEmpty(friendUsername))
+                return BadRequest("Invalid request");
+
+            var username = User.Identity.Name;
+            var result = _appService.RemoveFriendship(username, friendUsername);
+            if (result.IsSuccess)
+                return Ok(result.Message);
+            return BadRequest("Invalid request");
         }
     }
 }
