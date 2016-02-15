@@ -43,8 +43,8 @@
     <Compile Include="Adapters\IFriendshipAdapter.cs" />
     <Compile Include="Dtos\ActionResultDto.cs" />
     <Compile Include="Dtos\FriendshipDto.cs" />
-    <Compile Include="FriendshipService.cs" />
-    <Compile Include="IFriendshipService.cs" />
+    <Compile Include="FriendshipAppService.cs" />
+    <Compile Include="IFriendshipAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

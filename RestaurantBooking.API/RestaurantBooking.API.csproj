@@ -152,6 +152,10 @@
       <Project>{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}</Project>
       <Name>ApplicationServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Guest.Services\Guest.Services.csproj">
+      <Project>{68157F57-66F3-4547-A5FD-49357D429F50}</Project>
+      <Name>Guest.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,7 +16,6 @@ namespace ApplicationServices.Adapters
                 throw new ArgumentNullException("friendship");
             var friendshipDto = new FriendshipDto
             {
-                Status = friendship.Status.ToString(),
                 RequesterUsername = friendship.RequesterUsername,
                 ResponderUsername = friendship.ResponderUsername
             };

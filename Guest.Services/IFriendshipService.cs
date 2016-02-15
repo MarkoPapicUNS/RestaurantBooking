@@ -1,10 +1,13 @@
-﻿using Guest.Domain;
+﻿using System.Collections.Generic;
+using Guest.Domain;
 
 namespace Guest.Services
 {
     public interface IFriendshipService
     {
         void SendRequest(string senderUsername, string recipientUsername);
-        Friendship GetFriendship(string requesterUsername, string responderUsername);
+        Friendship GetFriendRequest(string senderUsername, string recipientUsername);
+        IEnumerable<Friendship> GetFriendRequests(string recipientUsername);
+        IEnumerable<Friendship> GetSentFriendRequests(string senderUsername);
     }
 }

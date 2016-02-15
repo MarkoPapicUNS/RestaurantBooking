@@ -10,12 +10,12 @@ using Guest.Services.Exceptions;
 
 namespace ApplicationServices
 {
-    public class FriendshipService : IFriendshipService
+    public class FriendshipAppService : IFriendshipAppService
     {
         private Guest.Services.IFriendshipService _friendshipService;
         private IFriendshipAdapter _adapter;
 
-        public FriendshipService(Guest.Services.IFriendshipService friendshipService, IFriendshipAdapter adapter)
+        public FriendshipAppService(Guest.Services.IFriendshipService friendshipService, IFriendshipAdapter adapter)
         {
             _friendshipService = friendshipService;
             _adapter = adapter;
@@ -52,19 +52,23 @@ namespace ApplicationServices
             return resultDto;
         }
 
-        public FriendshipDto GetFriendship(string requesterUsername, string responderUsername)
+        public FriendshipDto GetFriendRequest(string senderUsername, string recipientUsername)
         {
             FriendshipDto friendshipDto;
-            try
-            {
-                var friendship = _friendshipService.GetFriendship(requesterUsername, responderUsername);
-                friendshipDto = _adapter.AdaptFriendship(friendship);
-            }
-            catch (FriendshipException fe)
-            {
-                friendshipDto = null;
-            }
-            return friendshipDto;
+
+            var friendship = _friendshipService.GetFriendRequest(senderUsername, recipientUsername);
+            return friendship == null ? null : _adapter.AdaptFriendship(friendship);
+        }
+
+        public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)
+        {
+            var friendships = _friendshipService.GetFriendRequests(recipientUsername);
+            return friendships.Select(f => _adapter.AdaptFriendship(f));
+        }
+
+        public IEnumerable<FriendshipDto> GetSentFriendRequests(string senderUsername)
+        {
+            throw new NotImplementedException();
         }
     }
 }

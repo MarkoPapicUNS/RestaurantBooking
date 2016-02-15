@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Guest.Domain;
 using Guest.Services.Exceptions;
@@ -41,18 +42,33 @@ namespace Guest.Services
             }
         }
 
-        public Friendship GetFriendship(string requesterUsername, string responderUsername)
+        public Friendship GetFriendRequest(string senderUsername, string recipientUsername)
         {
-            if (requesterUsername == null)
-                throw new ArgumentNullException("requesterUsername");
-            if (responderUsername == null)
-                throw new ArgumentNullException("responderUsername");
+            if (senderUsername == null)
+                throw new ArgumentNullException("senderUsername");
+            if (recipientUsername == null)
+                throw new ArgumentNullException("recipientUsername");
 
+            var friendRequest = _repository.GetFriendship(senderUsername, recipientUsername);
+            if (friendRequest == null || friendRequest.Status != FriendshipStatus.RequestPending)
+                friendRequest = null;
+            return friendRequest;
+        }
 
-            var friendship = _repository.GetFriendship(requesterUsername, responderUsername);
-            if(friendship == null)
-                throw new FriendshipException("Friendship doesn't exist");
-            return friendship;
+        public IEnumerable<Friendship> GetFriendRequests(string recipientUsername)
+        {
+            if (recipientUsername == null)
+                throw new ArgumentNullException("recipientUsername");
+
+            var guest = _repository.Get(recipientUsername);
+            if (guest == null)
+                throw new FriendshipException(string.Format("Guest {0} doesn't exist", recipientUsername));
+            return guest.ReceivedFriendships.Where(r => r.Status == FriendshipStatus.Active);
+        }
+
+        public IEnumerable<Friendship> GetSentFriendRequests(string senderUsername)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ApplicationServices.Dtos;
 using Guest.Domain;
 

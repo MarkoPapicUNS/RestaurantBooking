@@ -17,7 +17,7 @@ namespace AppBuilder
         public static IDependencyResolver GetDependencyResolver()
         {
             var container = new UnityContainer();
-            container.RegisterType<IFriendshipService, FriendshipService>();
+            container.RegisterType<IFriendshipAppService, FriendshipAppService>();
             container.RegisterType<Guest.Services.IFriendshipService, Guest.Services.FriendshipService>();
             container.RegisterType<IGuestRepository, GuestRepository>();
             container.RegisterType<IFriendshipAdapter, FriendshipAdapter>();

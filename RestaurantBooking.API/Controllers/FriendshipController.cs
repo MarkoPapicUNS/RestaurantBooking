@@ -1,27 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using ApplicationServices;
 using ApplicationServices.Dtos;
+using Guest.Services.Exceptions;
 
 namespace RestaurantBooking.API.Controllers
 {
-
+    [Authorize(Roles = "Guest")]
     public class FriendshipController : ApiController
     {
-        private IFriendshipService _service;
+        private IFriendshipAppService _appService;
 
-        public FriendshipController(IFriendshipService service)
+        public FriendshipController(IFriendshipAppService appService)
         {
-            _service = service;
+            _appService = appService;
         }
 
-        public IHttpActionResult GetFriends(string username)
+        public IHttpActionResult GetFriends()
         {
-            return Ok();
+            throw new NotImplementedException();
         }
 
-        [Route("api/friendship/friendship/{responderUsername}", Name = "FriendshipRoute")]
-        public IHttpActionResult GetFriendship(string responderUsername)
+        [Route("api/friendship/friendrequest/{responderUsername}", Name = "FriendshipRoute")]
+        public IHttpActionResult GetFriendRequest(string responderUsername)
         {
             if (string.IsNullOrEmpty(responderUsername))
                 return BadRequest("Invalid request");
@@ -30,18 +32,32 @@ namespace RestaurantBooking.API.Controllers
             var requesterUsername = User.Identity.Name;
             try
             {
-                friendship = _service.GetFriendship(requesterUsername, responderUsername);
+                friendship = _appService.GetFriendRequest(requesterUsername, responderUsername);
             }
             catch (Exception e)
             {
-                return InternalServerError();
+                return InternalServerError(e);
             }
             if (friendship == null)
                 return NotFound();
             return Ok(friendship);
         }
 
-        [Authorize(Roles = "Guest")]
+        [Route("api/friendship/friendrequests")]
+        public IHttpActionResult GetFriendRequests()
+        {
+            var username = User.Identity.Name;
+            IEnumerable<FriendshipDto> friendships = _appService.GetFriendRequests(username);
+            return Ok(friendships);
+        }
+
+        public IHttpActionResult GetSentFriendRequests()
+        {
+            var username = User.Identity.Name;
+            IEnumerable<FriendshipDto> friendships = _appService.GetSentFriendRequests(username);
+            return Ok(friendships);
+        }
+
         [HttpPost]
         [Route("api/friendship/sendfriendrequest")]
         public IHttpActionResult SendFriendRequest([FromBody] string recipientUsername)
@@ -50,7 +66,7 @@ namespace RestaurantBooking.API.Controllers
                 return BadRequest("Invalid request");
 
             var senderUsername = User.Identity.Name;
-            var result = _service.SendFriendRequest(senderUsername, recipientUsername);
+            var result = _appService.SendFriendRequest(senderUsername, recipientUsername);
             if (result.IsSuccess)
                 return Created(Url.Link("FriendshipRoute", new { responderUsername = recipientUsername }), result.Message);
             else
