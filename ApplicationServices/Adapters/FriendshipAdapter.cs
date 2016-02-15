@@ -14,12 +14,26 @@ namespace ApplicationServices.Adapters
         {
             if (friendship == null)
                 throw new ArgumentNullException("friendship");
+
             var friendshipDto = new FriendshipDto
             {
                 RequesterUsername = friendship.RequesterUsername,
                 ResponderUsername = friendship.ResponderUsername
             };
             return friendshipDto;
+        }
+
+        public FriendDto AdaptFriend(Guest.Domain.Guest friend)
+        {
+            if (friend == null)
+                throw new ArgumentNullException("friend");
+
+            var friendDto = new FriendDto
+            {
+                Username = friend.Username,
+                Picture = friend.Picture
+            };
+            return friendDto;
         }
     }
 }

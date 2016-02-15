@@ -11,5 +11,6 @@ namespace Guest.Services.RepositoryContracts
     public interface IGuestRepository : IRepository<Domain.Guest, string>
     {
         Friendship GetFriendship(string requesterUsername, string responderUsername);
+        IQueryable<Friendship> GetFriendships();
     }
 }

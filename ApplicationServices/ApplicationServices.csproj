@@ -42,6 +42,7 @@
     <Compile Include="Adapters\FriendshipAdapter.cs" />
     <Compile Include="Adapters\IFriendshipAdapter.cs" />
     <Compile Include="Dtos\ActionResultDto.cs" />
+    <Compile Include="Dtos\FriendDto.cs" />
     <Compile Include="Dtos\FriendshipDto.cs" />
     <Compile Include="FriendshipAppService.cs" />
     <Compile Include="IFriendshipAppService.cs" />
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\Guest.Services\Guest.Services.csproj">
       <Project>{68157F57-66F3-4547-A5FD-49357D429F50}</Project>
       <Name>Guest.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{5C1C69A0-A3E7-4A88-84DC-EECB67B8A008}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

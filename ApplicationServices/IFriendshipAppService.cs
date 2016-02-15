@@ -9,5 +9,6 @@ namespace ApplicationServices
         FriendshipDto GetFriendRequest(string senderUsername, string recipientUsername);
         IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername);
         IEnumerable<FriendshipDto> GetSentFriendRequests(string senderUsername);
+        IEnumerable<FriendDto> GetFriends(string username); 
     }
 }

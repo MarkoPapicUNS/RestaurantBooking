@@ -8,5 +8,6 @@ namespace ApplicationServices.Adapters
     public interface IFriendshipAdapter
     {
         FriendshipDto AdaptFriendship(Friendship friendship);
+        FriendDto AdaptFriend(Guest.Domain.Guest friend);
     }
 }

@@ -9,8 +9,8 @@ namespace Shared
     public interface IRepository<TAggregate, in TKey> where TAggregate : IAggregateRoot
     {
         IQueryable<TAggregate> All();
-        TAggregate Get(TKey id);
-        void Save(TAggregate item);
+        TAggregate Find(TKey id);
+        void Insert(TAggregate item);
         void Commit();
     }
 }

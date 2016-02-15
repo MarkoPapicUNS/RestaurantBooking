@@ -32,7 +32,7 @@ namespace Guest.Services
             
             try
             {
-                var guest = _repository.Get(recipientUsername);
+                var guest = _repository.Find(recipientUsername);
                 guest.ReceivedFriendships.Add(friendRequest);
                 _repository.Commit();
             }
@@ -60,15 +60,30 @@ namespace Guest.Services
             if (recipientUsername == null)
                 throw new ArgumentNullException("recipientUsername");
 
-            var guest = _repository.Get(recipientUsername);
-            if (guest == null)
-                throw new FriendshipException(string.Format("Guest {0} doesn't exist", recipientUsername));
-            return guest.ReceivedFriendships.Where(r => r.Status == FriendshipStatus.Active);
+            var guest = _repository.Find(recipientUsername);
+            return guest == null ? null : guest.ReceivedFriendships.Where(r => r.Status == FriendshipStatus.RequestPending);
         }
 
         public IEnumerable<Friendship> GetSentFriendRequests(string senderUsername)
         {
-            throw new NotImplementedException();
+            if (senderUsername == null)
+                throw new ArgumentNullException("senderUsername");
+
+            var guest = _repository.Find(senderUsername);
+            return guest == null ? null : guest.RequestedFriendships.Where(r => r.Status == FriendshipStatus.RequestPending);
+        }
+
+        public IEnumerable<Domain.Guest> GetFriends(string username)
+        {
+            if (username == null)
+                throw new ArgumentNullException("username");
+
+            var friendships = _repository.GetFriendships();
+            var respondersUsernames =
+                friendships.Where(f => f.RequesterUsername == username && f.Status == FriendshipStatus.Active).Select(f2 => f2.ResponderUsername);
+            var requesterUsernames = friendships.Where(f => f.ResponderUsername == username && f.Status == FriendshipStatus.Active).Select(f2 => f2.RequesterUsername);
+            var friendsUsernames = respondersUsernames.Union(requesterUsernames);
+            return _repository.All().Where(g => friendsUsernames.Contains(g.Username));
         }
     }
 }

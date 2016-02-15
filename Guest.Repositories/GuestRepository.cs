@@ -25,7 +25,7 @@ namespace Guest.Repositories
             return _context.Guests.Include(g => g.ReceivedFriendships).Include(g2 => g2.RequestedFriendships);
         }
 
-        public Domain.Guest Get(string id)
+        public Domain.Guest Find(string id)
         {
             return _context.Guests.SingleOrDefault(g => g.Username == id);
         }
@@ -37,7 +37,12 @@ namespace Guest.Repositories
                     f => f.RequesterUsername == requesterUsername && f.ResponderUsername == responderUsername);
         }
 
-        public void Save(Domain.Guest item)
+        public IQueryable<Friendship> GetFriendships()
+        {
+            return _context.Frendships;
+        }
+
+        public void Insert(Domain.Guest item)
         {
             _context.Guests.Add(item);
         }

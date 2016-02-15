@@ -17,9 +17,22 @@ namespace RestaurantBooking.API.Controllers
             _appService = appService;
         }
 
+        [Route("api/friendship/friends")]
         public IHttpActionResult GetFriends()
         {
-            throw new NotImplementedException();
+            IEnumerable<FriendDto> friends;
+            var username = User.Identity.Name;
+            try
+            {
+                friends = _appService.GetFriends(username);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            if (friends == null)
+                return NotFound();
+            return Ok(friends);
         }
 
         [Route("api/friendship/friendrequest/{responderUsername}", Name = "FriendshipRoute")]
@@ -46,15 +59,36 @@ namespace RestaurantBooking.API.Controllers
         [Route("api/friendship/friendrequests")]
         public IHttpActionResult GetFriendRequests()
         {
+            IEnumerable<FriendshipDto> friendships;
             var username = User.Identity.Name;
-            IEnumerable<FriendshipDto> friendships = _appService.GetFriendRequests(username);
+            try
+            {
+                friendships = _appService.GetFriendRequests(username);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            if (friendships == null)
+                return BadRequest();
             return Ok(friendships);
         }
 
+        [Route("api/friendship/sentfriendrequests")]
         public IHttpActionResult GetSentFriendRequests()
         {
+            IEnumerable<FriendshipDto> friendships;
             var username = User.Identity.Name;
-            IEnumerable<FriendshipDto> friendships = _appService.GetSentFriendRequests(username);
+            try
+            {
+                friendships = _appService.GetSentFriendRequests(username);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            if (friendships == null)
+                return BadRequest();
             return Ok(friendships);
         }
 
@@ -68,9 +102,8 @@ namespace RestaurantBooking.API.Controllers
             var senderUsername = User.Identity.Name;
             var result = _appService.SendFriendRequest(senderUsername, recipientUsername);
             if (result.IsSuccess)
-                return Created(Url.Link("FriendshipRoute", new { responderUsername = recipientUsername }), result.Message);
-            else
-                return BadRequest(result.Message);
+                return Created(Url.Link("FriendshipRoute", new {responderUsername = recipientUsername}), result.Message);
+            return BadRequest(result.Message);
         }
     }
 }

@@ -63,12 +63,19 @@ namespace ApplicationServices
         public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)
         {
             var friendships = _friendshipService.GetFriendRequests(recipientUsername);
-            return friendships.Select(f => _adapter.AdaptFriendship(f));
+            return friendships == null ? null : friendships.Select(f => _adapter.AdaptFriendship(f));
         }
 
         public IEnumerable<FriendshipDto> GetSentFriendRequests(string senderUsername)
         {
-            throw new NotImplementedException();
+            var friendships = _friendshipService.GetSentFriendRequests(senderUsername);
+            return friendships == null ? null : friendships.Select(f => _adapter.AdaptFriendship(f));
+        }
+
+        public IEnumerable<FriendDto> GetFriends(string username)
+        {
+            var friends = _friendshipService.GetFriends(username);
+            return friends.Select(f => _adapter.AdaptFriend(f));
         }
     }
 }
