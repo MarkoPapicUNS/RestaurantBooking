@@ -39,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\FriendshipAdapter.cs" />
-    <Compile Include="Adapters\IFriendshipAdapter.cs" />
+    <Compile Include="Adapters\GuestAdapter.cs" />
+    <Compile Include="Adapters\IGuestAdapter.cs" />
     <Compile Include="Dtos\ActionResultDto.cs" />
-    <Compile Include="Dtos\FriendDto.cs" />
-    <Compile Include="Dtos\FriendRequestDto.cs" />
+    <Compile Include="Dtos\FriendDisplayDto.cs" />
+    <Compile Include="Dtos\FriendGuestDto.cs" />
+    <Compile Include="Dtos\IGuestDto.cs" />
+    <Compile Include="Dtos\MeDto.cs" />
+    <Compile Include="Dtos\StrangerGuestDto.cs" />
     <Compile Include="FriendshipAppService.cs" />
     <Compile Include="GuestAppService.cs" />
+    <Compile Include="GuestRelation.cs" />
     <Compile Include="IFriendshipAppService.cs" />
     <Compile Include="IGuestAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationServices.Dtos
 {
-    public class FriendDto
+    public class StrangerGuestDto : IGuestDto
     {
+        public GuestRelation Relation { get; set; }
         public string Username { get; set; }
         public string DisplayName { get; set; }
         public string Picture { get; set; }

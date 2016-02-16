@@ -18,8 +18,23 @@ namespace Guest.Services.RepositoryContracts
 
         public IQueryable<Domain.Guest> GetGuests()
         {
-            throw new NotImplementedException();
+            return _repository.All();
         }
+
+        public Domain.Guest GetGuest(string username)
+        {
+            return _repository.Find(username);
+        }
+
+        /*public IQueryable<Domain.Guest> GetRelatedGuests(string username)
+        {
+            var guest = _repository.Find(username);
+            var requesterUsernames = guest.ReceivedFriendships.Select(rf => rf.RequesterUsername);
+            var responderUsernames = guest.RequestedFriendships.Select(rf => rf.ResponderUsername);
+            var friendUsernames = requesterUsernames.Union(responderUsernames);
+            var friends = _repository.All().Where(f => friendUsernames.Contains(f.Username));
+            return friends;
+        }*/
 
         public IQueryable<Domain.Guest> GetFriends(string username)
         {
@@ -31,22 +46,25 @@ namespace Guest.Services.RepositoryContracts
             return friends;
         }
 
-        public IEnumerable<Friendship> GetFriendRequests(string username)
+        public IQueryable<Domain.Guest> GetFriendRequests(string username)
         {
             if (username == null)
                 throw new ArgumentNullException("username");
 
             var guest = _repository.Find(username);
-            return guest.ReceivedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending);
+            var usernames = guest.RequestedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending).Select(rf => rf.ResponderUsername);
+            return _repository.All().Where(g => usernames.Contains(g.Username));
+
         }
 
-        public IEnumerable<Friendship> GetSentFriendRequests(string username)
+        public IQueryable<Domain.Guest> GetSentFriendRequests(string username)
         {
             if (username == null)
                 throw new ArgumentNullException("username");
 
             var guest = _repository.Find(username);
-            return guest.RequestedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending);
+            var usernames = guest.ReceivedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending).Select(rf => rf.RequesterUsername);
+            return _repository.All().Where(g => usernames.Contains(g.Username));
         }
     }
 }

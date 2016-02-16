@@ -20,11 +20,11 @@ namespace AppBuilder
             var container = new UnityContainer();
             container.RegisterType<IFriendshipAppService, FriendshipAppService>();
             container.RegisterType<IFriendshipService, FriendshipService>();
+            container.RegisterType<IGuestAdapter, GuestAdapter>();
             container.RegisterType<IGuestAppService, GuestAppService>();
             container.RegisterType<IGuestService, GuestService>();
             container.RegisterType<IGuestRepository, GuestRepository>();
             container.RegisterType<IFriendshipRepository, FriendshipRepository>();
-            container.RegisterType<IFriendshipAdapter, FriendshipAdapter>();
             return new UnityResolver(container);
         }
     }

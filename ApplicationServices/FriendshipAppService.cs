@@ -14,12 +14,10 @@ namespace ApplicationServices
     public class FriendshipAppService : IFriendshipAppService
     {
         private IFriendshipService _friendshipService;
-        private IFriendshipAdapter _adapter;
 
-        public FriendshipAppService(IFriendshipService friendshipService, IFriendshipAdapter adapter)
+        public FriendshipAppService(IFriendshipService friendshipService)
         {
             _friendshipService = friendshipService;
-            _adapter = adapter;
         }
 
         public ActionResultDto SendFriendRequest(string senderUsername, string receiverUsername)
@@ -53,10 +51,10 @@ namespace ApplicationServices
             return resultDto;
         }
 
-        public FriendRequestDto GetFriendRequest(string senderUsername, string recipientUsername)
+        public string GetFriendRequest(string senderUsername, string recipientUsername)
         {
             var friendship = _friendshipService.GetFriendRequest(senderUsername, recipientUsername);
-            return friendship == null ? null : _adapter.AdaptFriendship(friendship);
+            return friendship == null ? null : string.Format("{0} to {1}", friendship.ResponderUsername, friendship.ResponderUsername);
         }
 
         /*public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)

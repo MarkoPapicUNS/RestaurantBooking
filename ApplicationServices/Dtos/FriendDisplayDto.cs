@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationServices.Dtos
 {
-    public class FriendRequestDto
+    public class FriendDisplayDto
     {
-        public string RequesterUsername { get; set; }
-        public string ResponderUsername { get; set; }
+        public string Username { get; set; }
+        public string DisplayName { get; set; }
+        public string Picture { get; set; }
     }
 }

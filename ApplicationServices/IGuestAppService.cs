@@ -9,8 +9,10 @@ namespace ApplicationServices
 {
     public interface IGuestAppService
     {
-        IEnumerable<FriendDto> GetFriends(string username);
-        IEnumerable<FriendRequestDto> GetFriendRequests(string username);
-        IEnumerable<FriendRequestDto> GetSentFriendRequests(string username);
+        IGuestDto GetGuest(string username, string guestUsername);
+        IEnumerable<FriendDisplayDto> GetGuests(string username);
+//        IEnumerable<FriendDto> GetFriends(string username);
+//        IEnumerable<FriendDto> GetFriendRequests(string username);
+//        IEnumerable<FriendDto> GetSentFriendRequests(string username);
     }
 }

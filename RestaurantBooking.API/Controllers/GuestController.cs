@@ -17,62 +17,29 @@ namespace RestaurantBooking.API.Controllers
             _appService = appService;
         }
 
-        [Route("api/guest/guest")]
-        public IHttpActionResult GetGuest(string username)
+        [Route("api/guest/guest/{guestUsername?}")]
+        public IHttpActionResult GetGuest(string guestUsername)
         {
-            return Ok();
-        }
-
-        [Route("api/guest/friends")]
-        public IHttpActionResult GetFriends()
-        {
-            IEnumerable<FriendDto> friends;
             var username = User.Identity.Name;
+            guestUsername = guestUsername ?? username;
             try
             {
-                friends = _appService.GetFriends(username);
+                var guest = _appService.GetGuest(username, guestUsername);
+                if (guest == null)
+                    return BadRequest();
+                return Ok(guest);
             }
             catch (Exception e)
             {
-                return InternalServerError(e);
+                return BadRequest();
             }
-            return Ok(friends);
         }
 
-        /*[Route("api/guest/friendrequests")]
-        public IHttpActionResult GetFriendRequests()
+        [Route("api/guest/guests")]
+        public IHttpActionResult GetGuests()
         {
-            IEnumerable<FriendRequestDto> friendRequests;
             var username = User.Identity.Name;
-            try
-            {
-                friendRequests = _appService.GetFriendRequests(username);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
-//            if (friendRequests == null)
-//                return BadRequest();
-            return Ok(friendRequests);
+            return Ok(_appService.GetGuests(username));
         }
-
-        [Route("api/guest/sentfriendrequests")]
-        public IHttpActionResult GetSentFriendRequests()
-        {
-            IEnumerable<FriendRequestDto> friendships;
-            var username = User.Identity.Name;
-            try
-            {
-                friendships = _appService.GetSentFriendRequests(username);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
-//            if (friendships == null)
-//                return BadRequest();
-            return Ok(friendships);
-        }*/
     }
 }

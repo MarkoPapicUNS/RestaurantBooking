@@ -10,8 +10,10 @@ namespace Guest.Services
     public interface IGuestService
     {
         IQueryable<Domain.Guest> GetGuests();
+        Domain.Guest GetGuest(string username);
+//        IQueryable<Domain.Guest> GetRelatedGuests(string username);
         IQueryable<Domain.Guest> GetFriends(string username);
-        IEnumerable<Friendship> GetFriendRequests(string username);
-        IEnumerable<Friendship> GetSentFriendRequests(string username);
+        IQueryable<Domain.Guest> GetFriendRequests(string username);
+        IQueryable<Domain.Guest> GetSentFriendRequests(string username);
     }
 }

@@ -22,7 +22,7 @@ namespace RestaurantBooking.API.Controllers
             if (string.IsNullOrEmpty(responderUsername))
                 return BadRequest("Invalid request");
 
-            FriendRequestDto friendRequest;
+            string friendRequest;
             var requesterUsername = User.Identity.Name;
             try
             {
