@@ -13,7 +13,7 @@ namespace Guest.Repositories
 {
     public class GuestRepository : IGuestRepository
     {
-        protected RestaurantBookingContext _context;
+        private RestaurantBookingContext _context;
 
         public GuestRepository()
         {
@@ -25,26 +25,9 @@ namespace Guest.Repositories
             return _context.Guests.Include(g => g.ReceivedFriendships).Include(g2 => g2.RequestedFriendships);
         }
 
-        public Domain.Guest Find(string id)
+        public Domain.Guest Find(string id) //I return single quest as IQueryable because of later includes
         {
-            return _context.Guests.SingleOrDefault(g => g.Username == id);
-        }
-
-        public Friendship GetFriendship(string requesterUsername, string responderUsername)
-        {
-            return
-                _context.Frendships.SingleOrDefault(
-                    f => f.RequesterUsername == requesterUsername && f.ResponderUsername == responderUsername);
-        }
-
-        public IQueryable<Friendship> GetFriendships()
-        {
-            return _context.Frendships;
-        }
-
-        public void DeleteFriendship(Friendship item)
-        {
-            _context.Frendships.Remove(item);
+            return _context.Guests.Include(g => g.ReceivedFriendships).Include(g => g.RequestedFriendships).FirstOrDefault(g => g.Username == id);
         }
 
         public void Insert(Domain.Guest item)

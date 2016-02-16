@@ -9,6 +9,7 @@ namespace ApplicationServices.Dtos
     public class FriendDto
     {
         public string Username { get; set; }
+        public string DisplayName { get; set; }
         public string Picture { get; set; }
     }
 }

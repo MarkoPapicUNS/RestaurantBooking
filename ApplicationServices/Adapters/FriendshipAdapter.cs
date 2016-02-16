@@ -10,12 +10,12 @@ namespace ApplicationServices.Adapters
 {
     public class FriendshipAdapter : IFriendshipAdapter
     {
-        public FriendshipDto AdaptFriendship(Friendship friendship)
+        public FriendRequestDto AdaptFriendship(Friendship friendship)
         {
             if (friendship == null)
                 throw new ArgumentNullException("friendship");
 
-            var friendshipDto = new FriendshipDto
+            var friendshipDto = new FriendRequestDto
             {
                 RequesterUsername = friendship.RequesterUsername,
                 ResponderUsername = friendship.ResponderUsername
@@ -31,6 +31,7 @@ namespace ApplicationServices.Adapters
             var friendDto = new FriendDto
             {
                 Username = friend.Username,
+                DisplayName = friend.DisplayFullName ? string.Format("{0} {1}", friend.FirstName, friend.LastName) : friend.Username,
                 Picture = friend.Picture
             };
             return friendDto;

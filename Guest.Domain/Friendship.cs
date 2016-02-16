@@ -1,6 +1,8 @@
-﻿namespace Guest.Domain
+﻿using Shared;
+
+namespace Guest.Domain
 {
-    public class Friendship
+    public class Friendship : IAggregateRoot
     {
         public FriendshipStatus Status { get; set; }
         public string RequesterUsername { get; set; }

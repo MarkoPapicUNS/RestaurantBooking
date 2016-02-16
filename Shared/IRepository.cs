@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IRepository<TAggregate, in TKey> where TAggregate : IAggregateRoot
+    public interface IRepository<TAggregate> where TAggregate : IAggregateRoot
     {
         IQueryable<TAggregate> All();
-        TAggregate Find(TKey id);
         void Insert(TAggregate item);
         void Delete(TAggregate item);
         void Commit();

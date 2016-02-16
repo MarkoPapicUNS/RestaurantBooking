@@ -8,8 +8,8 @@ using Shared;
 
 namespace Guest.Services.RepositoryContracts
 {
-    public interface IGuestRepository : IRepository<Domain.Guest>
+    public interface IFriendshipRepository : IRepository<Friendship>
     {
-        Domain.Guest Find(string id);
+        Friendship Find(string requesterUsername, string responderUsername);
     }
 }

@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using ApplicationServices.Adapters;
 using ApplicationServices.Dtos;
 using Guest.Domain;
+using Guest.Services;
 using Guest.Services.Exceptions;
 
 namespace ApplicationServices
 {
     public class FriendshipAppService : IFriendshipAppService
     {
-        private Guest.Services.IFriendshipService _friendshipService;
+        private IFriendshipService _friendshipService;
         private IFriendshipAdapter _adapter;
 
-        public FriendshipAppService(Guest.Services.IFriendshipService friendshipService, IFriendshipAdapter adapter)
+        public FriendshipAppService(IFriendshipService friendshipService, IFriendshipAdapter adapter)
         {
             _friendshipService = friendshipService;
             _adapter = adapter;
@@ -52,15 +53,13 @@ namespace ApplicationServices
             return resultDto;
         }
 
-        public FriendshipDto GetFriendRequest(string senderUsername, string recipientUsername)
+        public FriendRequestDto GetFriendRequest(string senderUsername, string recipientUsername)
         {
-            FriendshipDto friendshipDto;
-
             var friendship = _friendshipService.GetFriendRequest(senderUsername, recipientUsername);
             return friendship == null ? null : _adapter.AdaptFriendship(friendship);
         }
 
-        public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)
+        /*public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)
         {
             var friendships = _friendshipService.GetFriendRequests(recipientUsername);
             return friendships == null ? null : friendships.Select(f => _adapter.AdaptFriendship(f));
@@ -70,13 +69,7 @@ namespace ApplicationServices
         {
             var friendships = _friendshipService.GetSentFriendRequests(senderUsername);
             return friendships == null ? null : friendships.Select(f => _adapter.AdaptFriendship(f));
-        }
-
-        public IEnumerable<FriendDto> GetFriends(string username)
-        {
-            var friends = _friendshipService.GetFriends(username);
-            return friends.Select(f => _adapter.AdaptFriend(f));
-        }
+        }*/
 
         public ActionResultDto RemoveFriendship(string username, string friendUsername)
         {

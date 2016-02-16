@@ -12,6 +12,7 @@ namespace Guest.Domain
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool DisplayFullName { get; set; }
         public Address Address { get; set; }
         public Gender Gender { get; set; }
         public string Picture { get; set; }

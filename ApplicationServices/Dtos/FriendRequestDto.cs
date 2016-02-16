@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationServices.Dtos
 {
-    public class FriendshipDto
+    public class FriendRequestDto
     {
         public string RequesterUsername { get; set; }
         public string ResponderUsername { get; set; }

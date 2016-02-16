@@ -9,9 +9,9 @@ namespace Guest.Services
 {
     public class FriendshipService : IFriendshipService
     {
-        private IGuestRepository _repository;
+        private IFriendshipRepository _repository;
 
-        public FriendshipService(IGuestRepository repository)
+        public FriendshipService(IFriendshipRepository repository)
         {
             _repository = repository;
         }
@@ -32,8 +32,7 @@ namespace Guest.Services
             
             try
             {
-                var guest = _repository.Find(recipientUsername);
-                guest.ReceivedFriendships.Add(friendRequest);
+                _repository.Insert(friendRequest);
                 _repository.Commit();
             }
             catch (Exception e)
@@ -49,13 +48,13 @@ namespace Guest.Services
             if (recipientUsername == null)
                 throw new ArgumentNullException("recipientUsername");
 
-            var friendRequest = _repository.GetFriendship(senderUsername, recipientUsername);
+            var friendRequest = _repository.Find(senderUsername, recipientUsername);
             if (friendRequest == null || friendRequest.Status != FriendshipStatus.RequestPending)
                 friendRequest = null;
             return friendRequest;
         }
 
-        public IEnumerable<Friendship> GetFriendRequests(string recipientUsername)
+        /*public IEnumerable<Friendship> GetFriendRequests(string recipientUsername)
         {
             if (recipientUsername == null)
                 throw new ArgumentNullException("recipientUsername");
@@ -73,18 +72,19 @@ namespace Guest.Services
             return guest == null ? null : guest.RequestedFriendships.Where(r => r.Status == FriendshipStatus.RequestPending);
         }
 
-        public IEnumerable<Domain.Guest> GetFriends(string username)
+        public IEnumerable<Friendship> GetFriendships(string username)
         {
             if (username == null)
                 throw new ArgumentNullException("username");
 
-            var friendships = _repository.GetFriendships();
-            var respondersUsernames =
-                friendships.Where(f => f.RequesterUsername == username && f.Status == FriendshipStatus.Active).Select(f2 => f2.ResponderUsername);
-            var requesterUsernames = friendships.Where(f => f.ResponderUsername == username && f.Status == FriendshipStatus.Active).Select(f2 => f2.RequesterUsername);
-            var friendsUsernames = respondersUsernames.Union(requesterUsernames);
-            return _repository.All().Where(g => friendsUsernames.Contains(g.Username));
-        }
+            var allFriendships = _repository.All();
+            var usersFriendships =
+                allFriendships.Where(
+                    f =>
+                        f.Status == FriendshipStatus.Active &&
+                        (f.RequesterUsername == username || f.ResponderUsername == username));
+            return usersFriendships;
+        }*/
 
         public void RemoveFriendship(string username, string friendUsername)
         {
@@ -92,12 +92,11 @@ namespace Guest.Services
                 throw new ArgumentNullException("username");
 
             var friendship =
-                _repository.GetFriendships()
-                    .FirstOrDefault(
+                _repository.All().FirstOrDefault(
                         f =>
                             f.RequesterUsername == username && f.ResponderUsername == friendUsername ||
                             f.RequesterUsername == friendUsername && f.ResponderUsername == username);
-            _repository.DeleteFriendship(friendship);
+            _repository.Delete(friendship);
             _repository.Commit();
         }
     }

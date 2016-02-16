@@ -7,9 +7,9 @@ namespace Guest.Services
     {
         void SendRequest(string senderUsername, string recipientUsername);
         Friendship GetFriendRequest(string senderUsername, string recipientUsername);
-        IEnumerable<Friendship> GetFriendRequests(string recipientUsername);
-        IEnumerable<Friendship> GetSentFriendRequests(string senderUsername);
-        IEnumerable<Domain.Guest> GetFriends(string username);
+//        IEnumerable<Friendship> GetFriendRequests(string recipientUsername);
+//        IEnumerable<Friendship> GetSentFriendRequests(string senderUsername);
+//        IEnumerable<Friendship> GetFriendships(string username);
         void RemoveFriendship(string username, string friendUsername);
     }
 }

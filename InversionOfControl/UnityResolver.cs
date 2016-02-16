@@ -10,7 +10,7 @@ namespace InversionOfControl
 {
     public class UnityResolver : IDependencyResolver
     {
-        protected IUnityContainer container;
+        private IUnityContainer container;
 
         public UnityResolver(IUnityContainer container)
         {

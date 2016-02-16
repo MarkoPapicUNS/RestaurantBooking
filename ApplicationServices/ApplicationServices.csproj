@@ -43,9 +43,11 @@
     <Compile Include="Adapters\IFriendshipAdapter.cs" />
     <Compile Include="Dtos\ActionResultDto.cs" />
     <Compile Include="Dtos\FriendDto.cs" />
-    <Compile Include="Dtos\FriendshipDto.cs" />
+    <Compile Include="Dtos\FriendRequestDto.cs" />
     <Compile Include="FriendshipAppService.cs" />
+    <Compile Include="GuestAppService.cs" />
     <Compile Include="IFriendshipAppService.cs" />
+    <Compile Include="IGuestAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

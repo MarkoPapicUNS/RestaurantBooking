@@ -6,6 +6,7 @@ using System.Web.Http.Dependencies;
 using ApplicationServices;
 using ApplicationServices.Adapters;
 using Guest.Repositories;
+using Guest.Services;
 using Guest.Services.RepositoryContracts;
 using InversionOfControl;
 using Microsoft.Practices.Unity;
@@ -18,8 +19,11 @@ namespace AppBuilder
         {
             var container = new UnityContainer();
             container.RegisterType<IFriendshipAppService, FriendshipAppService>();
-            container.RegisterType<Guest.Services.IFriendshipService, Guest.Services.FriendshipService>();
+            container.RegisterType<IFriendshipService, FriendshipService>();
+            container.RegisterType<IGuestAppService, GuestAppService>();
+            container.RegisterType<IGuestService, GuestService>();
             container.RegisterType<IGuestRepository, GuestRepository>();
+            container.RegisterType<IFriendshipRepository, FriendshipRepository>();
             container.RegisterType<IFriendshipAdapter, FriendshipAdapter>();
             return new UnityResolver(container);
         }

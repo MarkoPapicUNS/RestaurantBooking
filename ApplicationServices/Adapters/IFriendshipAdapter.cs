@@ -7,7 +7,7 @@ namespace ApplicationServices.Adapters
 {
     public interface IFriendshipAdapter
     {
-        FriendshipDto AdaptFriendship(Friendship friendship);
+        FriendRequestDto AdaptFriendship(Friendship friendship);
         FriendDto AdaptFriend(Guest.Domain.Guest friend);
     }
 }
