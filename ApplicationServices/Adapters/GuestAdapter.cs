@@ -9,7 +9,7 @@ namespace ApplicationServices.Adapters
 {
     public class GuestAdapter : IGuestAdapter
     {
-        public FriendDisplayDto AdaptFriendDisplay(Guest.Domain.Guest friend)
+        public FriendDisplayDto AdaptGuestDisplay(Guest.Domain.Guest friend)
         {
             if (friend == null)
                 throw new ArgumentNullException("friend");
@@ -39,7 +39,7 @@ namespace ApplicationServices.Adapters
                 Address = guest.Address,
                 Gender = guest.Gender,
                 Picture = guest.Picture,
-                Friends = guestFriends.Select(gf => AdaptFriendDisplay(gf)),
+                Friends = guestFriends.Select(gf => AdaptGuestDisplay(gf)),
             };
         }
 
@@ -57,9 +57,9 @@ namespace ApplicationServices.Adapters
                 Address = guest.Address,
                 Gender = guest.Gender,
                 Picture = guest.Picture,
-                Friends = guestFriends.Select(gf => AdaptFriendDisplay(gf)),
-                FriendRequests = friendRequests.Select(fr => AdaptFriendDisplay(fr)),
-                SentFriendRequests = sentFriendRequests.Select(sfr => AdaptFriendDisplay(sfr))
+                Friends = guestFriends.Select(gf => AdaptGuestDisplay(gf)),
+                FriendRequests = friendRequests.Select(fr => AdaptGuestDisplay(fr)),
+                SentFriendRequests = sentFriendRequests.Select(sfr => AdaptGuestDisplay(sfr))
             };
         }
 

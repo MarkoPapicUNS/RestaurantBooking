@@ -42,26 +42,8 @@ namespace ApplicationServices
 
         public IEnumerable<FriendDisplayDto> GetGuests(string username)
         {
-            var guests = _guestService.GetGuests().ToArray();
-            return guests.Select(g => _adapter.AdaptFriendDisplay(g));
+            var guests = _guestService.GetGuests(username).ToArray();
+            return guests.Select(g => _adapter.AdaptGuestDisplay(g));
         }
-
-        /*public IEnumerable<FriendDto> GetFriends(string username)
-        {
-            var friends = _guestService.GetFriends(username).ToArray();
-            return friends.Select(f => _adapter.AdaptFriend(f));
-        }
-
-        public IEnumerable<FriendDto> GetFriendRequests(string username)
-        {
-            var friendShips = _guestService.GetFriendRequests(username);
-            return friendShips.Select(f => _adapter.AdaptFriend(f));
-        }
-
-        public IEnumerable<FriendDto> GetSentFriendRequests(string username)
-        {
-            var friendShips = _guestService.GetFriendRequests(username);
-            return friendShips.Select(f => _adapter.AdaptFriend(f));
-        }*/
     }
 }

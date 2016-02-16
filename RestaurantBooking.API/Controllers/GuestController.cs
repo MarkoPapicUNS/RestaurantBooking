@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using ApplicationServices;
-using ApplicationServices.Dtos;
 
 namespace RestaurantBooking.API.Controllers
 {

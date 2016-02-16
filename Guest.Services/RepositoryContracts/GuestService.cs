@@ -16,25 +16,15 @@ namespace Guest.Services.RepositoryContracts
             _repository = repository;
         }
 
-        public IQueryable<Domain.Guest> GetGuests()
+        public IQueryable<Domain.Guest> GetGuests(string username)
         {
-            return _repository.All();
+            return _repository.All().Where(g => g.Username != username);
         }
 
         public Domain.Guest GetGuest(string username)
         {
             return _repository.Find(username);
         }
-
-        /*public IQueryable<Domain.Guest> GetRelatedGuests(string username)
-        {
-            var guest = _repository.Find(username);
-            var requesterUsernames = guest.ReceivedFriendships.Select(rf => rf.RequesterUsername);
-            var responderUsernames = guest.RequestedFriendships.Select(rf => rf.ResponderUsername);
-            var friendUsernames = requesterUsernames.Union(responderUsernames);
-            var friends = _repository.All().Where(f => friendUsernames.Contains(f.Username));
-            return friends;
-        }*/
 
         public IQueryable<Domain.Guest> GetFriends(string username)
         {
