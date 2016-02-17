@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationServices.Dtos;
+using ApplicationServices.Models;
+using Shared;
 
 namespace ApplicationServices.Adapters
 {
@@ -74,5 +76,25 @@ namespace ApplicationServices.Adapters
                 Picture = guest.Picture
             };
         }
+
+	    public Guest.Domain.Guest CreateGuestFromProfileModel(ProfileModel data)
+	    {
+		    return new Guest.Domain.Guest
+		    {
+			    Username = data.Username,
+				FirstName = data.FirstName,
+				LastName = data.LastName,
+				DisplayFullName = data.DisplayFullName,
+				Address = new Address
+				{
+					City = data.City,
+					Number = data.Number,
+					Street = data.Street,
+					Zip = data.Zip
+				},
+				Gender = (Gender)data.Gender,
+				Picture = data.Picture
+		    };
+	    }
     }
 }

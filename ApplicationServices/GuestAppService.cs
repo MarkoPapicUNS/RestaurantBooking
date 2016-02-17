@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationServices.Adapters;
 using ApplicationServices.Dtos;
+using ApplicationServices.Models;
 using Guest.Services;
+using Guest.Services.Exceptions;
 
 namespace ApplicationServices
 {
@@ -45,5 +47,23 @@ namespace ApplicationServices
             var guests = _guestService.GetGuests(username).ToArray();
             return guests.Select(g => _adapter.AdaptGuestDisplay(g));
         }
+
+	    public ActionResultDto UpdateProfile(ProfileModel profileModel)
+	    {
+			var result = new ActionResultDto();
+		    var guest = _adapter.CreateGuestFromProfileModel(profileModel);
+		    try
+		    {
+			    _guestService.UpdateProfile(guest);
+			    result.IsSuccess = true;
+			    result.Message = "Profile succesfully updated!";
+		    }
+		    catch (GuestException ge)
+		    {
+			    result.IsSuccess = false;
+			    result.Message = ge.Message;
+		    }
+			return result;
+	    }
     }
 }

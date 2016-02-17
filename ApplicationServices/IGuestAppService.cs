@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationServices.Dtos;
+using ApplicationServices.Models;
 
 namespace ApplicationServices
 {
@@ -11,5 +12,6 @@ namespace ApplicationServices
     {
         IGuestDto GetGuest(string username, string guestUsername);
         IEnumerable<FriendDisplayDto> GetGuests(string username);
+	    ActionResultDto UpdateProfile(ProfileModel profileModel);
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Guest.Domain;
+using Guest.Services.Exceptions;
+using Guest.Services.RepositoryContracts;
 
-namespace Guest.Services.RepositoryContracts
+namespace Guest.Services
 {
     public class GuestService : IGuestService
     {
@@ -26,7 +25,24 @@ namespace Guest.Services.RepositoryContracts
             return _repository.Find(username);
         }
 
-        public IQueryable<Domain.Guest> GetFriends(string username)
+	    public void UpdateProfile(Domain.Guest profileData)
+	    {
+			if (profileData == null)
+				throw new ArgumentNullException("profileData");
+
+		    var guest = _repository.Find(profileData.Username);
+			if (guest == null)
+				throw new GuestException(string.Format("User {0} doesn't exist.", profileData.Username));
+		    guest.FirstName = profileData.FirstName;
+		    guest.LastName = profileData.LastName;
+		    guest.DisplayFullName = profileData.DisplayFullName;
+		    guest.Address = profileData.Address;
+		    guest.Gender = profileData.Gender;
+		    guest.Picture = profileData.Picture;
+			_repository.Commit();
+	    }
+
+	    public IQueryable<Domain.Guest> GetFriends(string username)
         {
             var guest = _repository.Find(username);
             var requesterUsernames = guest.ReceivedFriendships.Where(rf => rf.Status == FriendshipStatus.Active).Select(rf => rf.RequesterUsername);

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using ApplicationServices;
+using ApplicationServices.Models;
 
 namespace RestaurantBooking.API.Controllers
 {
@@ -40,5 +43,30 @@ namespace RestaurantBooking.API.Controllers
             var username = User.Identity.Name;
             return Ok(_appService.GetGuests(username));
         }
+
+		[Route("api/guest/updateprofile")]
+	    public IHttpActionResult UpdateProfile(ProfileModel profileModel)
+	    {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			var username = User.Identity.Name;
+			if (username !=  profileModel.Username)
+				return Unauthorized();
+
+		    try
+		    {
+			    var result = _appService.UpdateProfile(profileModel);
+			    if (result.IsSuccess)
+				    return Ok(result.Message);
+			    return BadRequest(result.Message);
+		    }
+		    catch (Exception e)
+		    {
+			    return InternalServerError(e);
+		    }
+		}
     }
 }

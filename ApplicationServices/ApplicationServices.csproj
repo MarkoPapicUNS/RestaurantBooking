@@ -52,6 +52,7 @@
     <Compile Include="GuestRelation.cs" />
     <Compile Include="IFriendshipAppService.cs" />
     <Compile Include="IGuestAppService.cs" />
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
