@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business Logic", "{6DA72C36-6ACC-4A09-896E-7827CB851015}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Services", "Application Services", "{A258F9BF-2176-400C-AEE1-F1EB2927280B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationServices", "ApplicationServices\ApplicationServices.csproj", "{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Repositories", "Restaurant.Repositories\Restaurant.Repositories.csproj", "{D9E261B7-EDE7-477D-92B8-858863B0ECA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9E261B7-EDE7-477D-92B8-858863B0ECA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E261B7-EDE7-477D-92B8-858863B0ECA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E261B7-EDE7-477D-92B8-858863B0ECA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E261B7-EDE7-477D-92B8-858863B0ECA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +116,6 @@ Global
 		{42C1C2B6-7C10-40A8-8040-2655283E56C9} = {8A3B452E-0BFC-4F6B-A433-D243CEA24CAA}
 		{049D6784-CA56-4157-A344-91E3C1926489} = {DD790F64-9840-4C45-BA19-25D833327E5F}
 		{B6A8C4AF-4A70-4309-8925-3DEC72DB9943} = {A258F9BF-2176-400C-AEE1-F1EB2927280B}
+		{D9E261B7-EDE7-477D-92B8-858863B0ECA9} = {8A3B452E-0BFC-4F6B-A433-D243CEA24CAA}
 	EndGlobalSection
 EndGlobal

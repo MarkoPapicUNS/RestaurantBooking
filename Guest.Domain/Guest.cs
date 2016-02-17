@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Shared;
 
 namespace Guest.Domain
@@ -16,8 +12,9 @@ namespace Guest.Domain
         public Address Address { get; set; }
         public Gender Gender { get; set; }
         public string Picture { get; set; }
-        public virtual List<Friendship> RequestedFriendships { get; set; }
-        public virtual List<Friendship> ReceivedFriendships { get; set; }
+        public List<Friendship> RequestedFriendships { get; set; }
+        public List<Friendship> ReceivedFriendships { get; set; }
+        public List<GuestReservation> Reservations { get; set; }
 
         public override bool Equals(object obj)
         {

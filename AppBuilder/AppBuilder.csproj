@@ -95,6 +95,14 @@
       <Project>{42C1C2B6-7C10-40A8-8040-2655283E56C9}</Project>
       <Name>InversionOfControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Restaurant.Repositories\Restaurant.Repositories.csproj">
+      <Project>{d9e261b7-ede7-477d-92b8-858863b0eca9}</Project>
+      <Name>Restaurant.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurant.Services\Restaurant.Services.csproj">
+      <Project>{843521b7-a772-4a7c-b8c2-ace4aef059e9}</Project>
+      <Name>Restaurant.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5C1C69A0-A3E7-4A88-84DC-EECB67B8A008}</Project>
       <Name>Shared</Name>

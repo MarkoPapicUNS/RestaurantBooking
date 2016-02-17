@@ -22,12 +22,12 @@ namespace Guest.Repositories
 
         public IQueryable<Domain.Guest> All()
         {
-            return _context.Guests.Include(g => g.ReceivedFriendships).Include(g2 => g2.RequestedFriendships);
+            return _context.Guests.Include(g => g.ReceivedFriendships).Include(g2 => g2.RequestedFriendships).Include(g => g.Reservations);
         }
 
         public Domain.Guest Find(string id) //I return single quest as IQueryable because of later includes
         {
-            return _context.Guests.Include(g => g.ReceivedFriendships).Include(g => g.RequestedFriendships).FirstOrDefault(g => g.Username == id);
+            return _context.Guests.Include(g => g.ReceivedFriendships).Include(g => g.RequestedFriendships).Include(g => g.Reservations).Include(g => g.Reservations).FirstOrDefault(g => g.Username == id);
         }
 
         public void Insert(Domain.Guest item)

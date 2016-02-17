@@ -39,8 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Meal.cs" />
+    <Compile Include="RestaurantReservation.cs" />
+    <Compile Include="Restaurant.cs" />
+    <Compile Include="Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TablePosition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.GuestRestaurant\Shared.GuestRestaurant.csproj">
+      <Project>{cad2a54d-d734-47c2-801c-de790a1e4a56}</Project>
+      <Name>Shared.GuestRestaurant</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{5c1c69a0-a3e7-4a88-84dc-eecb67b8a008}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

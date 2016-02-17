@@ -41,18 +41,29 @@
   <ItemGroup>
     <Compile Include="Exceptions\FriendshipException.cs" />
     <Compile Include="Exceptions\GuestException.cs" />
+    <Compile Include="Exceptions\ReservationException.cs" />
     <Compile Include="FriendshipService.cs" />
     <Compile Include="IFriendshipService.cs" />
     <Compile Include="IGuestService.cs" />
+    <Compile Include="IReservationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuestService.cs" />
     <Compile Include="RepositoryContracts\IFriendshipRepository.cs" />
     <Compile Include="RepositoryContracts\IGuestRepository.cs" />
+    <Compile Include="ReservationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Guest.Domain\Guest.Domain.csproj">
       <Project>{F501F383-D2CD-4A0C-8406-561B5B118B7E}</Project>
       <Name>Guest.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurant.Domain\Restaurant.Domain.csproj">
+      <Project>{9D86D202-01AC-421C-A6B8-B761717B350D}</Project>
+      <Name>Restaurant.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurant.Services\Restaurant.Services.csproj">
+      <Project>{843521b7-a772-4a7c-b8c2-ace4aef059e9}</Project>
+      <Name>Restaurant.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5c1c69a0-a3e7-4a88-84dc-eecb67b8a008}</Project>

@@ -50,8 +50,13 @@
   <ItemGroup>
     <Compile Include="FriendshipMap.cs" />
     <Compile Include="GuestMap.cs" />
+    <Compile Include="GuestReservationMap.cs" />
+    <Compile Include="MealMap.cs" />
     <Compile Include="RestaurantBookingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestaurantMap.cs" />
+    <Compile Include="RestaurantReservationMap.cs" />
+    <Compile Include="TableMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -63,6 +68,10 @@
     <ProjectReference Include="..\Guest.Domain\Guest.Domain.csproj">
       <Project>{F501F383-D2CD-4A0C-8406-561B5B118B7E}</Project>
       <Name>Guest.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurant.Domain\Restaurant.Domain.csproj">
+      <Project>{9d86d202-01ac-421c-a6b8-b761717b350d}</Project>
+      <Name>Restaurant.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5c1c69a0-a3e7-4a88-84dc-eecb67b8a008}</Project>
