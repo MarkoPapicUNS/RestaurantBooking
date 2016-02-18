@@ -10,5 +10,6 @@ namespace RestaurantBooking.API.Models
         public string RestaurantId { get; set; }
         public int TableNumber { get; set; }
         public DateTime Time { get; set; }
+		public double Hours { get; set; }
     }
 }

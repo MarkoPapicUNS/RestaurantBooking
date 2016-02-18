@@ -10,6 +10,7 @@ namespace Restaurant.Domain
     {
         public string GuestUsername { get; set; }
         public string RestaurantId { get; set; }
+		public string GuestDisplayName { get; set; }
         public int TableNumber { get; set; }
         public DateTime Time { get; set; }
         public double Hours { get; set; }

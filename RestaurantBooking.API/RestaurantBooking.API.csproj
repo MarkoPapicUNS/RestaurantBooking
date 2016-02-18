@@ -131,6 +131,7 @@
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Models\ReservationDto.cs" />
+    <Compile Include="Models\ReservationInvitationDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

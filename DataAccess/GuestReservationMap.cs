@@ -12,7 +12,7 @@ namespace DataAccess
     {
         public GuestReservationMap()
         {
-            HasKey(gr => new { gr.RestaurantId, gr.GuestUsername, gr.TableNumber, gr.Time });
+            HasKey(gr => gr.ReservationId);
             HasRequired(gr => gr.Guest).WithMany(r => r.Reservations).HasForeignKey(t => t.GuestUsername);
         }
     }

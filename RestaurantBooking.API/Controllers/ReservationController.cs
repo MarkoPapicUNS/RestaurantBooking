@@ -25,17 +25,36 @@ namespace RestaurantBooking.API.Controllers
             return Ok();
         }
 
-        [Route("api/reservation/makereservation")]
+		[Route("api/reservation/reservation/{reservationid}/{friendid}", Name = "ReservationInvitationRoute")]
+		public IHttpActionResult GetReservationInvitation(string restaurantId, DateTime time, string friendId)
+		{
+			return Ok();
+		}
+
+		[Route("api/reservation/makereservation")]
         public IHttpActionResult MakeReservation(ReservationDto reservation)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var username = User.Identity.Name;
-            var result = _appService.MakeReservation(username, reservation.RestaurantId, reservation.TableNumber, reservation.Time);
+            var result = _appService.MakeReservation(username, reservation.RestaurantId, reservation.TableNumber, reservation.Time, reservation.Hours);
             if (result.IsSuccess)
                 return Created(Url.Link("ReservationRoute", new { restaurantid = reservation.RestaurantId, tablenumber = reservation.TableNumber, time = reservation.Time }), result.Message);
             return BadRequest(result.Message);
         }
+
+		[Route("api/reservation/invitefriend")]
+		public IHttpActionResult InviteFriend(ReservationInvitationDto reservationInvitation)
+	    {
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			var username = User.Identity.Name;
+			var result = _appService.InviteFriend(username, reservationInvitation.ReservationId, reservationInvitation.InvitedGuestUsername);
+			if (result.IsSuccess)
+				return Created(Url.Link("ReservationInvitationRoute", new { reservationid = reservationInvitation.ReservationId, friendid = reservationInvitation.InvitedGuestUsername }), result.Message);
+			return BadRequest(result.Message);
+		}
     }
 }

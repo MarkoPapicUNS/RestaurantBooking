@@ -18,12 +18,12 @@ namespace ApplicationServices
             _reservationService = reservationService;
         }
 
-        public ActionResultDto MakeReservation(string username, string restaurantId, int tableNumber, DateTime time)
+        public ActionResultDto MakeReservation(string username, string restaurantId, int tableNumber, DateTime time, double hours)
         {
             ActionResultDto result = new ActionResultDto();
             try
             {
-                _reservationService.MakeReservation(username, restaurantId, tableNumber, time);
+                _reservationService.MakeReservation(username, restaurantId, tableNumber, time, hours);
                 result.IsSuccess = true;
                 result.Message = "Table succesfully reserved!";
             }
@@ -44,5 +44,27 @@ namespace ApplicationServices
         {
             throw new NotImplementedException();
         }
+
+	    public ActionResultDto InviteFriend(string username, int reservationId, string friendUsername)
+		{
+		    ActionResultDto result = new ActionResultDto();
+		    try
+		    {
+			    _reservationService.InviteFriend(username, reservationId, friendUsername);
+			    result.IsSuccess = true;
+			    result.Message = string.Format("{0} invited to join you.", friendUsername);
+		    }
+			catch (ReservationException re)
+			{
+				result.IsSuccess = false;
+				result.Message = re.Message;
+			}
+			catch (Exception e)
+			{
+				result.IsSuccess = false;
+				result.Message = "Unable to process request.";
+			}
+			return result;
+		}
     }
 }

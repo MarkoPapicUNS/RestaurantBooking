@@ -35,7 +35,8 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new RestaurantMap());
             modelBuilder.Configurations.Add(new RestaurantReservationMap());
             modelBuilder.Configurations.Add(new TableMap());
-            modelBuilder.Configurations.Add(new MealMap());            
+            modelBuilder.Configurations.Add(new MealMap());
+	        modelBuilder.Configurations.Add(new ReservationInvitationMap());
         }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="GuestMap.cs" />
     <Compile Include="GuestReservationMap.cs" />
     <Compile Include="MealMap.cs" />
+    <Compile Include="ReservationInvitationMap.cs" />
     <Compile Include="RestaurantBookingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantMap.cs" />
