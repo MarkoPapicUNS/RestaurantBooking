@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿using Newtonsoft.Json;
+using Shared;
 
 namespace Guest.Domain
 {
@@ -9,7 +10,9 @@ namespace Guest.Domain
         public string ResponderUsername { get; set; }
 
         //for Entity Framework
+		[JsonIgnore]
         public virtual Guest Requester { get; set; }
+		[JsonIgnore]
         public virtual Guest Responder { get; set; }
 
         public override bool Equals(object obj)

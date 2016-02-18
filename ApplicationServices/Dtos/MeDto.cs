@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Guest.Domain;
 using Shared;
 
 namespace ApplicationServices.Dtos
@@ -20,5 +21,6 @@ namespace ApplicationServices.Dtos
         public IEnumerable<FriendDisplayDto> Friends { get; set; }
         public IEnumerable<FriendDisplayDto> FriendRequests { get; set; }
         public IEnumerable<FriendDisplayDto> SentFriendRequests { get; set; }
+		public IEnumerable<GuestReservation> Reservations { get; set; } 
     }
 }

@@ -19,8 +19,9 @@ namespace RestaurantBooking.API.Controllers
             _appService = appService;
         }
 
+		[Authorize(Roles="Guest")]
         [Route("api/guest/guest/{guestUsername?}")]
-        public IHttpActionResult GetGuest(string guestUsername)
+        public IHttpActionResult GetGuest(string guestUsername = null)
         {
             var username = User.Identity.Name;
             guestUsername = guestUsername ?? username;
@@ -28,7 +29,7 @@ namespace RestaurantBooking.API.Controllers
             {
                 var guest = _appService.GetGuest(username, guestUsername);
                 if (guest == null)
-                    return BadRequest();
+                    return NotFound();
                 return Ok(guest);
             }
             catch (Exception e)

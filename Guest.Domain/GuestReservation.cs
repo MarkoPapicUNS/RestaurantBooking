@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Guest.Domain
 {
@@ -15,6 +16,7 @@ namespace Guest.Domain
         public double Hours { get; set; }
 
         //for Entity Framework
+		[JsonIgnore]
         public virtual Guest Guest { get; set; }
     }
 }

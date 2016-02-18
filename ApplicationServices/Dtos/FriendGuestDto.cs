@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Guest.Domain;
 using Shared;
 
 namespace ApplicationServices.Dtos
@@ -13,6 +14,7 @@ namespace ApplicationServices.Dtos
         public Address Address { get; set; }
         public Gender Gender { get; set; }
         public string Picture { get; set; }
-        public IEnumerable<FriendDisplayDto> Friends { get; set; } 
+        public IEnumerable<FriendDisplayDto> Friends { get; set; }
+		public IEnumerable<GuestReservation> Reservations { get; set; } 
     }
 }

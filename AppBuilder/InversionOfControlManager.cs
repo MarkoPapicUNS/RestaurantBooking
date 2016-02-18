@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http.Dependencies;
+﻿using System.Web.Http.Dependencies;
 using ApplicationServices;
 using ApplicationServices.Adapters;
 using Guest.Repositories;
@@ -10,12 +6,12 @@ using Guest.Services;
 using Guest.Services.RepositoryContracts;
 using InversionOfControl;
 using Microsoft.Practices.Unity;
-using Restaurant.Services.RepositoryContracts;
 using Restaurant.Repositories;
+using Restaurant.Services.RepositoryContracts;
 
 namespace AppBuilder
 {
-    public class InversionOfControlManager
+	public class InversionOfControlManager
     {
         public static IDependencyResolver GetDependencyResolver()
         {
