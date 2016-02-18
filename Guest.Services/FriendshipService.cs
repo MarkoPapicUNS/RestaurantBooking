@@ -4,16 +4,20 @@ using System.Linq;
 using Guest.Domain;
 using Guest.Services.Exceptions;
 using Guest.Services.RepositoryContracts;
+using Shared;
+using System.Threading.Tasks;
 
 namespace Guest.Services
 {
     public class FriendshipService : IFriendshipService
     {
         private IFriendshipRepository _repository;
+        private ILogger _logger;
 
-        public FriendshipService(IFriendshipRepository repository)
+        public FriendshipService(IFriendshipRepository repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public void SendRequest(string senderUsername, string recipientUsername)
@@ -23,6 +27,7 @@ namespace Guest.Services
             if (recipientUsername == null)
                 throw new ArgumentNullException("recipientUsername");
 
+            Task.Run( () => _logger.Log(LogMessageType.Notification, string.Format("Started sending request sending friend request from {0} to {1}", senderUsername, recipientUsername)));
             var friendRequest = new Friendship
             {
                 RequesterUsername = senderUsername,
@@ -37,6 +42,7 @@ namespace Guest.Services
             }
             catch (Exception e)
             {
+                Task.Run(() => _logger.Log(LogMessageType.Error, e.Message));
                 throw new FriendshipException("Not possible to process this request.");
             }
         }
@@ -91,6 +97,7 @@ namespace Guest.Services
             if (username == null)
                 throw new ArgumentNullException("username");
 
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started removing {0} from {1}'s friends", friendUsername, username)));
             var friendship =
                 _repository.All().FirstOrDefault(
                         f =>

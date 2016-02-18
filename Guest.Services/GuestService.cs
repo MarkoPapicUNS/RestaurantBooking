@@ -3,25 +3,31 @@ using System.Linq;
 using Guest.Domain;
 using Guest.Services.Exceptions;
 using Guest.Services.RepositoryContracts;
+using System.Threading.Tasks;
+using Shared;
 
 namespace Guest.Services
 {
     public class GuestService : IGuestService
     {
         private IGuestRepository _repository;
+        private ILogger _logger;
 
-        public GuestService(IGuestRepository repository)
+        public GuestService(IGuestRepository repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public IQueryable<Domain.Guest> GetGuests(string username)
         {
+            Task.Run(() => _logger.Log(LogMessageType.Notification, "Started retrieving all guests"));
             return _repository.All().Where(g => g.Username != username);
         }
 
         public Domain.Guest GetGuest(string username)
         {
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started retrieving guest {0}", username)));
             return _repository.Find(username);
         }
 
@@ -30,7 +36,8 @@ namespace Guest.Services
 			if (profileData == null)
 				throw new ArgumentNullException("profileData");
 
-		    var guest = _repository.Find(profileData.Username);
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started updating profile for {0}", profileData.Username)));
+            var guest = _repository.Find(profileData.Username);
 			if (guest == null)
 				throw new GuestException(string.Format("User {0} doesn't exist.", profileData.Username));
 		    guest.FirstName = profileData.FirstName;
@@ -44,6 +51,7 @@ namespace Guest.Services
 
 	    public IQueryable<Domain.Guest> GetFriends(string username)
         {
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started retrieving all frends for {0}", username)));
             var guest = _repository.Find(username);
             var requesterUsernames = guest.ReceivedFriendships.Where(rf => rf.Status == FriendshipStatus.Active).Select(rf => rf.RequesterUsername);
             var responderUsernames = guest.RequestedFriendships.Where(rf => rf.Status == FriendshipStatus.Active).Select(rf => rf.ResponderUsername);
@@ -57,6 +65,7 @@ namespace Guest.Services
             if (username == null)
                 throw new ArgumentNullException("username");
 
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started retrieving all frend requests for {0}", username)));
             var guest = _repository.Find(username);
             var usernames = guest.RequestedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending).Select(rf => rf.ResponderUsername);
             return _repository.All().Where(g => usernames.Contains(g.Username));
@@ -68,6 +77,7 @@ namespace Guest.Services
             if (username == null)
                 throw new ArgumentNullException("username");
 
+            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started retrieving all sent frend requests for {0}", username)));
             var guest = _repository.Find(username);
             var usernames = guest.ReceivedFriendships.Where(rf => rf.Status == FriendshipStatus.RequestPending).Select(rf => rf.RequesterUsername);
             return _repository.All().Where(g => usernames.Contains(g.Username));

@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace RestaurantBooking.API.Controllers
 {
+    [Authorize(Roles = "Guest")]
     public class ReservationController : ApiController
     {
         private IReservationAppService _appService;

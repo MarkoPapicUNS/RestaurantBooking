@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="FriendshipMap.cs" />
     <Compile Include="GuestMap.cs" />
+    <Compile Include="GuestRatingMap.cs" />
     <Compile Include="GuestReservationMap.cs" />
+    <Compile Include="LogMap.cs" />
     <Compile Include="MealMap.cs" />
     <Compile Include="ReservationInvitationMap.cs" />
     <Compile Include="RestaurantBookingContext.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="RestaurantMap.cs" />
     <Compile Include="RestaurantReservationMap.cs" />
     <Compile Include="TableMap.cs" />
+    <Compile Include="VisitsMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

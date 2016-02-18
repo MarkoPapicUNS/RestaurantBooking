@@ -156,6 +156,14 @@
       <Project>{B6A8C4AF-4A70-4309-8925-3DEC72DB9943}</Project>
       <Name>ApplicationServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Guest.Services\Guest.Services.csproj">
+      <Project>{68157f57-66f3-4547-a5fd-49357d429f50}</Project>
+      <Name>Guest.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{c8c6da9e-95cb-4369-b495-8e5a4aa6f214}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5C1C69A0-A3E7-4A88-84DC-EECB67B8A008}</Project>
       <Name>Shared</Name>

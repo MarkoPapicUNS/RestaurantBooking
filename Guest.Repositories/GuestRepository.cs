@@ -22,12 +22,12 @@ namespace Guest.Repositories
 
         public IQueryable<Domain.Guest> All()
         {
-	        return
-		        _context.Guests.Include(g => g.ReceivedFriendships)
-			        .Include(g2 => g2.RequestedFriendships)
-			        .Include(g => g.Reservations)
-			        .Include(g => g.SentReservationInvitations)
-			        .Include(g => g.ReservationInvitations);
+            return
+                _context.Guests.Include(g => g.ReceivedFriendships)
+                    .Include(g2 => g2.RequestedFriendships)
+                    .Include(g => g.Reservations)
+                    .Include(g => g.SentReservationInvitations)
+                    .Include(g => g.ReservationInvitations);
         }
 
         public Domain.Guest Find(string id) //I return single quest as IQueryable because of later includes
@@ -39,6 +39,8 @@ namespace Guest.Repositories
 			        .Include(g => g.Reservations)
 			        .Include(g => g.SentReservationInvitations)
 			        .Include(g => g.ReservationInvitations)
+                    .Include(g => g.Ratings)
+                    .Include(g => g.Visits)
 			        .FirstOrDefault(g => g.Username == id);
         }
 

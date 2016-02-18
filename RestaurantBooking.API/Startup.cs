@@ -8,6 +8,11 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using System.Threading;
+using Logger;
+using Shared;
+using AppBuilder;
+using Guest.Services;
 
 namespace RestaurantBooking.API
 {
@@ -20,6 +25,10 @@ namespace RestaurantBooking.API
             ConfigureOAuth(app);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
+
+            //from here
+            IReservationService reservationService = InversionOfControlManager.ResolveReservationService<IReservationService>();
+            var timer = new Timer((x) => reservationService.CreateRatingsFromCompletedReservations(), null, 0, 20000);
         }
 
         public void ConfigureOAuth(IAppBuilder app)

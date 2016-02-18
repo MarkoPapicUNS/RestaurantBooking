@@ -14,6 +14,7 @@ namespace Guest.Domain
         public string RestaurantId { get; set; }
 		public string RestaurantName { get; set; }
         public int TableNumber { get; set; }
+        public bool DidShowUp { get; set; }
         public DateTime Time { get; set; }
         public double Hours { get; set; }
 		public List<ReservationInvitation> Invitations { get; set; }

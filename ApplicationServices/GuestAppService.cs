@@ -8,6 +8,7 @@ using ApplicationServices.Dtos;
 using ApplicationServices.Models;
 using Guest.Services;
 using Guest.Services.Exceptions;
+using Shared;
 
 namespace ApplicationServices
 {
@@ -15,12 +16,13 @@ namespace ApplicationServices
     {
         private IGuestService _guestService;
         private IGuestAdapter _adapter;
-
-
-        public GuestAppService(IGuestService guestService, IGuestAdapter adapter)
+        private ILogger _logger;
+        
+        public GuestAppService(IGuestService guestService, IGuestAdapter adapter, ILogger logger)
         {
             _guestService = guestService;
             _adapter = adapter;
+            _logger = logger;
         }
 
         public IGuestDto GetGuest(string username, string guestUsername)
@@ -57,12 +59,13 @@ namespace ApplicationServices
 			    _guestService.UpdateProfile(guest);
 			    result.IsSuccess = true;
 			    result.Message = "Profile succesfully updated!";
-		    }
+                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Succesfully update profile for {0}", profileModel.Username)));
+            }
 		    catch (GuestException ge)
 		    {
 			    result.IsSuccess = false;
 			    result.Message = ge.Message;
-		    }
+            }
 			return result;
 	    }
     }

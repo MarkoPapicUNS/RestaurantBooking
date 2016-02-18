@@ -8,16 +8,19 @@ using ApplicationServices.Dtos;
 using Guest.Domain;
 using Guest.Services;
 using Guest.Services.Exceptions;
+using Shared;
 
 namespace ApplicationServices
 {
     public class FriendshipAppService : IFriendshipAppService
     {
         private IFriendshipService _friendshipService;
+        private ILogger _logger;
 
-        public FriendshipAppService(IFriendshipService friendshipService)
+        public FriendshipAppService(IFriendshipService friendshipService, ILogger logger)
         {
             _friendshipService = friendshipService;
+            _logger = logger;
         }
 
         public ActionResultDto SendFriendRequest(string senderUsername, string receiverUsername)
@@ -31,6 +34,7 @@ namespace ApplicationServices
                     IsSuccess = true,
                     Message = string.Format("Friend request succesfully sent to {0}.", receiverUsername)
                 };
+                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Friend request successfully sent from {0} to {1}", senderUsername, receiverUsername)));
             }
             catch (FriendshipException fe)
             {
@@ -42,6 +46,7 @@ namespace ApplicationServices
             }
             catch (Exception e)
             {
+                Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
                 resultDto = new ActionResultDto
                 {
                     IsSuccess = false,
@@ -80,9 +85,11 @@ namespace ApplicationServices
                     IsSuccess = true,
                     Message = string.Format("{0} is removed friends.", friendUsername)
                 };
+                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
             }
             catch (Exception e)
             {
+                Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
                 result = new ActionResultDto
                 {
                     IsSuccess = false,

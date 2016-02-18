@@ -45,6 +45,7 @@
     <Compile Include="ILogger.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="LogMessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

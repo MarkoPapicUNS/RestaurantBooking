@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    interface ILogger
+    public interface ILogger
     {
-        void Log(LogMessageType messageType, string message, DateTime time);
+        void Log(LogMessageType messageType, string message);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    enum LogMessageType
+    public enum LogMessageType
     {
         Notification = 0,
         Warning,

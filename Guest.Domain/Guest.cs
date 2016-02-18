@@ -17,6 +17,8 @@ namespace Guest.Domain
         public List<GuestReservation> Reservations { get; set; }
 		public List<ReservationInvitation> ReservationInvitations { get; set; }
 		public List<ReservationInvitation> SentReservationInvitations { get; set; }
+        public List<GuestRating> Ratings { get; set; }
+        public List<Visit> Visits { get; set; }
 
         public override bool Equals(object obj)
         {

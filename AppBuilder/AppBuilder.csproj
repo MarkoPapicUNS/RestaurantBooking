@@ -95,6 +95,10 @@
       <Project>{42C1C2B6-7C10-40A8-8040-2655283E56C9}</Project>
       <Name>InversionOfControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{c8c6da9e-95cb-4369-b495-8e5a4aa6f214}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Restaurant.Repositories\Restaurant.Repositories.csproj">
       <Project>{d9e261b7-ede7-477d-92b8-858863b0eca9}</Project>
       <Name>Restaurant.Repositories</Name>
