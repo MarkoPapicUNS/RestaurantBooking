@@ -64,6 +64,24 @@ namespace Guest.Services
             return friendRequest;
         }
 
+        public void AcceptFriendRequest(string senderUsername, string recipientUsername)
+        {
+            if (senderUsername == null)
+                throw new ArgumentNullException("senderUsername");
+            if (recipientUsername == null)
+                throw new ArgumentNullException("senderUsername");
+
+            //Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started removing {0} from {1}'s friends", friendUsername, username)));
+            _logger.Log(LogMessageType.Notification,
+                string.Format("Accepting friend request from {0} to {1}", senderUsername, recipientUsername));
+            var friendship =
+                _repository.All()
+                    .FirstOrDefault(
+                        f => f.RequesterUsername == senderUsername && f.ResponderUsername == recipientUsername && f.Status == FriendshipStatus.RequestPending);
+            friendship.Status = FriendshipStatus.Active;
+            _repository.Commit();
+        }
+
         /*public IEnumerable<Friendship> GetFriendRequests(string recipientUsername)
         {
             if (recipientUsername == null)

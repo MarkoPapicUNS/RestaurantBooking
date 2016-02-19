@@ -7,6 +7,7 @@ namespace ApplicationServices
     {
         ActionResultDto SendFriendRequest(string senderUsername, string receiverUsername);
         string GetFriendRequest(string senderUsername, string recipientUsername);
+        ActionResultDto AcceptFriendRequest(string senderUsername, string recipientUsername);
 //        IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername);
 //        IEnumerable<FriendshipDto> GetSentFriendRequests(string senderUsername);
         ActionResultDto RemoveFriendship(string username, string friendUsername);

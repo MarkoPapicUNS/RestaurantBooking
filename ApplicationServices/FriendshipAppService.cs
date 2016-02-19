@@ -67,6 +67,35 @@ namespace ApplicationServices
             return friendship == null ? null : string.Format("{0} to {1}", friendship.ResponderUsername, friendship.ResponderUsername);
         }
 
+        public ActionResultDto AcceptFriendRequest(string senderUsername, string recipientUsername)
+        {
+            ActionResultDto result;
+            try
+            {
+                _friendshipService.AcceptFriendRequest(senderUsername, recipientUsername);
+                result = new ActionResultDto
+                {
+                    IsSuccess = true,
+                    Message = string.Format("Friend request from {0} accepted!", recipientUsername)
+                };
+                //Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
+                _logger.Log(LogMessageType.Notification,
+                    string.Format("Friend request from {0} to {1} accepted", senderUsername, recipientUsername));
+
+            }
+            catch (Exception e)
+            {
+                //Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
+                _logger.Log(LogMessageType.Notification, e.Message);
+                result = new ActionResultDto
+                {
+                    IsSuccess = false,
+                    Message = "Unable to perform this request."
+                };
+            }
+            return result;
+        }
+
         /*public IEnumerable<FriendshipDto> GetFriendRequests(string recipientUsername)
         {
             var friendships = _friendshipService.GetFriendRequests(recipientUsername);

@@ -49,6 +49,19 @@ namespace RestaurantBooking.API.Controllers
             return BadRequest(result.Message);
         }
 
+        [Route("api/friendship/acceptfriendrequest")]
+        public IHttpActionResult AcceptFriendRequest([FromBody] string senderUsername)
+        {
+            if (string.IsNullOrEmpty(senderUsername))
+                return BadRequest("Invalid request");
+
+            var recipientUsername = User.Identity.Name;
+            var result = _appService.AcceptFriendRequest(senderUsername, recipientUsername);
+            if (result.IsSuccess)
+                return Ok(result.Message);
+            return BadRequest(result.Message);
+        }
+
         [Route("api/friendship/removefriend")]
         public IHttpActionResult RemoveFriend([FromBody] string friendUsername)
         {
