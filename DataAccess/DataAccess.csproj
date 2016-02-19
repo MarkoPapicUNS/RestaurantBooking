@@ -58,6 +58,7 @@
     <Compile Include="RestaurantBookingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantMap.cs" />
+    <Compile Include="RestaurantRatingMap.cs" />
     <Compile Include="RestaurantReservationMap.cs" />
     <Compile Include="TableMap.cs" />
     <Compile Include="VisitsMap.cs" />

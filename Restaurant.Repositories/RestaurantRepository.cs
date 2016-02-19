@@ -2,6 +2,7 @@
 using Restaurant.Services.RepositoryContracts;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,12 @@ namespace Restaurant.Repositories
 
         public IQueryable<Domain.Restaurant> All()
         {
-            return _context.Restaurants.Include("Reservations");
+            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables);
         }
 
         public Restaurant.Domain.Restaurant Find(string id)
         {
-            return _context.Restaurants.Include("Reservations").FirstOrDefault(r => r.RestaurantId == id);
+            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables).FirstOrDefault(r => r.RestaurantId == id);
         }
 
         public void Insert(Restaurant.Domain.Restaurant item)

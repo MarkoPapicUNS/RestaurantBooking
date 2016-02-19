@@ -129,7 +129,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FriendshipController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Models\RatingDto.cs" />
     <Compile Include="Models\ReservationDto.cs" />
     <Compile Include="Models\ReservationInvitationDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,39 +14,46 @@ using Logger;
 namespace AppBuilder
 {
 	public class InversionOfControlManager
-    {
-        public static IDependencyResolver GetDependencyResolver()
-        {
-            var container = new UnityContainer();
-            container.RegisterType<IFriendshipAppService, FriendshipAppService>();
-            container.RegisterType<IFriendshipService, FriendshipService>();
-            container.RegisterType<IGuestAdapter, GuestAdapter>();
-            container.RegisterType<IGuestAppService, GuestAppService>();
-            container.RegisterType<IGuestService, GuestService>();
-            container.RegisterType<IReservationAppService, ReservationAppService>();
-            container.RegisterType<IReservationService, ReservationService>();
-            container.RegisterType<IGuestRepository, GuestRepository>();
-            container.RegisterType<IFriendshipRepository, FriendshipRepository>();
-            container.RegisterType<IRestaurantRepository, RestaurantRepository>();
-            container.RegisterType<ILogger, DbLoger>();
-            return new UnityResolver(container);
+	{
+	    private static UnityContainer _container;
+        public static UnityContainer Container {
+            get
+            {
+                if (_container == null)
+                {
+                    _container = new UnityContainer();
+                    RegisterTypes();
+                }
+                return _container;
+            }
+            set { _container = value; }
         }
 
-        public static T ResolveReservationService<T>() //TODO: Reuse container from constructor
+	    private static void RegisterTypes()
+	    {
+            _container.RegisterType<IFriendshipAppService, FriendshipAppService>();
+            _container.RegisterType<IFriendshipService, FriendshipService>();
+            _container.RegisterType<IGuestAdapter, GuestAdapter>();
+            _container.RegisterType<IGuestAppService, GuestAppService>();
+            _container.RegisterType<IGuestService, GuestService>();
+            _container.RegisterType<IReservationAppService, ReservationAppService>();
+            _container.RegisterType<IReservationService, ReservationService>();
+            _container.RegisterType<IRatingAppService, RatingAppService>();
+            _container.RegisterType<IRatingService, RatingService>();
+            _container.RegisterType<IGuestRepository, GuestRepository>();
+            _container.RegisterType<IFriendshipRepository, FriendshipRepository>();
+            _container.RegisterType<IRestaurantRepository, RestaurantRepository>();
+            _container.RegisterType<ILogger, DbLoger>();
+	    }
+
+        public static IDependencyResolver GetDependencyResolver()
         {
-            var container = new UnityContainer();
-            container.RegisterType<IFriendshipAppService, FriendshipAppService>();
-            container.RegisterType<IFriendshipService, FriendshipService>();
-            container.RegisterType<IGuestAdapter, GuestAdapter>();
-            container.RegisterType<IGuestAppService, GuestAppService>();
-            container.RegisterType<IGuestService, GuestService>();
-            container.RegisterType<IReservationAppService, ReservationAppService>();
-            container.RegisterType<IReservationService, ReservationService>();
-            container.RegisterType<IGuestRepository, GuestRepository>();
-            container.RegisterType<IFriendshipRepository, FriendshipRepository>();
-            container.RegisterType<IRestaurantRepository, RestaurantRepository>();
-            container.RegisterType<ILogger, DbLoger>();
-            return container.Resolve<T>();
+            return new UnityResolver(Container);
+        }
+
+        public static T Resolve<T>() //TODO: Reuse container from constructor
+        {
+            return Container.Resolve<T>();
         }
     }
 }

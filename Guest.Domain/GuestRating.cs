@@ -14,6 +14,7 @@ namespace Guest.Domain
         public string RestaurantName { get; set; }
         public int Rating { get; set; }
         public bool Rated { get; set; }
+        public string Comment { get; set; }
 
         //for Entity Framework
         [JsonIgnore]

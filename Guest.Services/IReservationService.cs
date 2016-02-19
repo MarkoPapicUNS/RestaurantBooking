@@ -11,6 +11,5 @@ namespace Guest.Services
         void MakeReservation(string username, string restaurantId, int tableNumber, DateTime time, double hours);
         void CancelReservation(string username, string restaurantId, int tableNumber, DateTime time);
 	    void InviteFriend(string username, int reservationId, string friendUsername);
-        void CreateRatingsFromCompletedReservations();
     }
 }

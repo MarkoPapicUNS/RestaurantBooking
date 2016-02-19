@@ -21,6 +21,8 @@ namespace ApplicationServices.Dtos
         public IEnumerable<FriendDisplayDto> Friends { get; set; }
         public IEnumerable<FriendDisplayDto> FriendRequests { get; set; }
         public IEnumerable<FriendDisplayDto> SentFriendRequests { get; set; }
-		public IEnumerable<GuestReservation> Reservations { get; set; } 
+		public IEnumerable<GuestReservation> Reservations { get; set; }
+        public IEnumerable<GuestRating> Ratings { get; set; }
+        public IEnumerable<Visit> Visits { get; set; }
     }
 }

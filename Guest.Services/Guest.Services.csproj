@@ -41,13 +41,16 @@
   <ItemGroup>
     <Compile Include="Exceptions\FriendshipException.cs" />
     <Compile Include="Exceptions\GuestException.cs" />
+    <Compile Include="Exceptions\RatingException.cs" />
     <Compile Include="Exceptions\ReservationException.cs" />
     <Compile Include="FriendshipService.cs" />
     <Compile Include="IFriendshipService.cs" />
     <Compile Include="IGuestService.cs" />
+    <Compile Include="IRatingService.cs" />
     <Compile Include="IReservationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GuestService.cs" />
+    <Compile Include="RatingService.cs" />
     <Compile Include="RepositoryContracts\IFriendshipRepository.cs" />
     <Compile Include="RepositoryContracts\IGuestRepository.cs" />
     <Compile Include="ReservationService.cs" />

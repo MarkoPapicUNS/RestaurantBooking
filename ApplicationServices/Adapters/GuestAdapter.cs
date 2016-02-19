@@ -42,7 +42,9 @@ namespace ApplicationServices.Adapters
                 Gender = guest.Gender,
                 Picture = guest.Picture,
                 Friends = guestFriends.Select(gf => AdaptGuestDisplay(gf)),
-				Reservations = guest.Reservations.ToArray()
+				Reservations = guest.Reservations.ToArray(),
+                Ratings = guest.Ratings.ToArray(),
+                Visits = guest.Visits.ToArray()
             };
         }
 
@@ -63,7 +65,9 @@ namespace ApplicationServices.Adapters
                 Friends = guestFriends.Select(gf => AdaptGuestDisplay(gf)),
                 FriendRequests = friendRequests.Select(fr => AdaptGuestDisplay(fr)),
                 SentFriendRequests = sentFriendRequests.Select(sfr => AdaptGuestDisplay(sfr)),
-				Reservations = guest.Reservations.ToArray()
+				Reservations = guest.Reservations.ToArray(),
+                Ratings = guest.Ratings.ToArray(),
+                Visits = guest.Visits.ToArray()
             };
         }
 

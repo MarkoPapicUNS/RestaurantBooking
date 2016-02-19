@@ -21,6 +21,7 @@ namespace DataAccess
         public DbSet<Table> RestaurantTables { get; set; }
         public DbSet<Meal> RestaurantMeals { get; set; }
         public DbSet<GuestRating> GuestRatings { get; set; }
+        public DbSet<RestaurantRating> RestaurantRatings { get; set; }
         public DbSet<Visit> Visits { get; set; }
         public DbSet<Log> Logs { get; set; }
 
@@ -42,6 +43,7 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new MealMap());
 	        modelBuilder.Configurations.Add(new ReservationInvitationMap());
 	        modelBuilder.Configurations.Add(new GuestRatingMap());
+	        modelBuilder.Configurations.Add(new RestaurantRatingMap());
 	        modelBuilder.Configurations.Add(new VisitMap());
             modelBuilder.Configurations.Add(new LogMap());
         }

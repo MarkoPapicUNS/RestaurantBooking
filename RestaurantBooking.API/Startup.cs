@@ -18,6 +18,8 @@ namespace RestaurantBooking.API
 {
     public class Startup
     {
+        public static Timer Timer {get; set; }
+
         public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
@@ -27,8 +29,8 @@ namespace RestaurantBooking.API
             app.UseWebApi(config);
 
             //from here
-            IReservationService reservationService = InversionOfControlManager.ResolveReservationService<IReservationService>();
-            var timer = new Timer((x) => reservationService.CreateRatingsFromCompletedReservations(), null, 0, 20000);
+            IRatingService ratingService = InversionOfControlManager.Resolve<IRatingService>();
+            Timer = new Timer((x) => ratingService.CreateRatingsFromCompletedReservations(), null, 0, 60000);
         }
 
         public void ConfigureOAuth(IAppBuilder app)

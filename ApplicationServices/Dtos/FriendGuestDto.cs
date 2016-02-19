@@ -15,6 +15,8 @@ namespace ApplicationServices.Dtos
         public Gender Gender { get; set; }
         public string Picture { get; set; }
         public IEnumerable<FriendDisplayDto> Friends { get; set; }
-		public IEnumerable<GuestReservation> Reservations { get; set; } 
+		public IEnumerable<GuestReservation> Reservations { get; set; }
+        public IEnumerable<GuestRating> Ratings { get; set; } 
+        public IEnumerable<Visit> Visits { get; set; } 
     }
 }
