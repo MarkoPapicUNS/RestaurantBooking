@@ -103,9 +103,10 @@ namespace Guest.Services
 
         public void CreateRatingsFromCompletedReservations()
         {
-            Task.Run(() => _logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings"));
+			//Task.Run(() => _logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings"));
+	        _logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings");
 
-            try
+			try
             {
                 var guests = _guestRepository.All();
                 //var completeReservations = guests.SelectMany(g => g.Reservations).Where(r => r.DidShowUp && DateTime.Now >= r.Time + TimeSpan.FromHours(r.Hours));
@@ -172,11 +173,14 @@ namespace Guest.Services
                     }
                 }
                 _guestRepository.Commit();
-                Task.Run(() => _logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings"));
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings"));
+	            _logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings");
+
             }
             catch (Exception e)
             {
-                Task.Run(() => _logger.Log(LogMessageType.Error, e.Message));
+				//Task.Run(() => _logger.Log(LogMessageType.Error, e.Message));
+	            _logger.Log(LogMessageType.Error, e.Message);
             }
         }
 

@@ -34,7 +34,10 @@ namespace ApplicationServices
                     IsSuccess = true,
                     Message = string.Format("Friend request succesfully sent to {0}.", receiverUsername)
                 };
-                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Friend request successfully sent from {0} to {1}", senderUsername, receiverUsername)));
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Friend request successfully sent from {0} to {1}", senderUsername, receiverUsername)));
+	            _logger.Log(LogMessageType.Notification,
+		            string.Format("Friend request successfully sent from {0} to {1}", senderUsername, receiverUsername));
+
             }
             catch (FriendshipException fe)
             {
@@ -46,8 +49,10 @@ namespace ApplicationServices
             }
             catch (Exception e)
             {
-                Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
-                resultDto = new ActionResultDto
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
+	            _logger.Log(LogMessageType.Notification, e.Message);
+
+				resultDto = new ActionResultDto
                 {
                     IsSuccess = false,
                     Message = "Request cannot be processed"
@@ -85,12 +90,16 @@ namespace ApplicationServices
                     IsSuccess = true,
                     Message = string.Format("{0} is removed friends.", friendUsername)
                 };
-                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
+	            _logger.Log(LogMessageType.Notification,
+		            string.Format("{0} removed successfully from {1}'s friends", friendUsername, username));
+
             }
             catch (Exception e)
             {
-                Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
-                result = new ActionResultDto
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
+	            _logger.Log(LogMessageType.Notification, e.Message);
+				result = new ActionResultDto
                 {
                     IsSuccess = false,
                     Message = "Unable to perform this request."

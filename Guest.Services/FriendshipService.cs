@@ -27,8 +27,12 @@ namespace Guest.Services
             if (recipientUsername == null)
                 throw new ArgumentNullException("recipientUsername");
 
-            Task.Run( () => _logger.Log(LogMessageType.Notification, string.Format("Started sending request sending friend request from {0} to {1}", senderUsername, recipientUsername)));
-            var friendRequest = new Friendship
+			//Task.Run( () => _logger.Log(LogMessageType.Notification, string.Format("Started sending request sending friend request from {0} to {1}", senderUsername, recipientUsername)));
+	        _logger.Log(LogMessageType.Notification,
+		        string.Format("Started sending request sending friend request from {0} to {1}", senderUsername,
+			        recipientUsername));
+
+			var friendRequest = new Friendship
             {
                 RequesterUsername = senderUsername,
                 ResponderUsername = recipientUsername,
@@ -97,8 +101,10 @@ namespace Guest.Services
             if (username == null)
                 throw new ArgumentNullException("username");
 
-            Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started removing {0} from {1}'s friends", friendUsername, username)));
-            var friendship =
+			//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Started removing {0} from {1}'s friends", friendUsername, username)));
+	        _logger.Log(LogMessageType.Notification,
+		        string.Format("Started removing {0} from {1}'s friends", friendUsername, username));
+			var friendship =
                 _repository.All().FirstOrDefault(
                         f =>
                             f.RequesterUsername == username && f.ResponderUsername == friendUsername ||

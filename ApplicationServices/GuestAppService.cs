@@ -59,8 +59,11 @@ namespace ApplicationServices
 			    _guestService.UpdateProfile(guest);
 			    result.IsSuccess = true;
 			    result.Message = "Profile succesfully updated!";
-                Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Succesfully update profile for {0}", profileModel.Username)));
-            }
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("Succesfully update profile for {0}", profileModel.Username)));
+			    _logger.Log(LogMessageType.Notification,
+				    string.Format("Succesfully update profile for {0}", profileModel.Username));
+
+		    }
 		    catch (GuestException ge)
 		    {
 			    result.IsSuccess = false;
