@@ -50,7 +50,31 @@ namespace ApplicationServices
             return guests.Select(g => _adapter.AdaptGuestDisplay(g));
         }
 
-	    public ActionResultDto UpdateProfile(ProfileModel profileModel)
+        public ActionResultDto AddGuest(string username)
+        {
+            var result = new ActionResultDto();
+            try
+            {
+                _guestService.AddGuest(username);
+                result.IsSuccess = true;
+                result.Message = string.Format("Guest {0} succesfully registered!");
+                _logger.Log(LogMessageType.Notification, string.Format("Guest {0} successfully registered!", username));
+            }
+            catch (GuestException ge)
+            {
+                result.IsSuccess = false;
+                result.Message = ge.Message;
+                _logger.Log(LogMessageType.Error, ge.Message);
+            }
+            catch (Exception e)
+            {
+                result.IsSuccess = false;
+                result.Message = "Unable to process request";
+                _logger.Log(LogMessageType.Error, e.Message);
+            }
+        }
+
+        public ActionResultDto UpdateProfile(ProfileModel profileModel)
 	    {
 			var result = new ActionResultDto();
 		    var guest = _adapter.CreateGuestFromProfileModel(profileModel);

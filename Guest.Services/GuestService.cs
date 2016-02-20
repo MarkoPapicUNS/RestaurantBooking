@@ -5,6 +5,7 @@ using Guest.Services.Exceptions;
 using Guest.Services.RepositoryContracts;
 using System.Threading.Tasks;
 using Shared;
+using Guest = Guest.Domain.Guest;
 
 namespace Guest.Services
 {
@@ -33,7 +34,21 @@ namespace Guest.Services
 			return _repository.Find(username);
         }
 
-	    public void UpdateProfile(Domain.Guest profileData)
+        public void AddGuest(string username)
+        {
+            _logger.Log(LogMessageType.Notification, string.Format("Adding guest {0}", username));
+            var guest = _repository.Find(username);
+            if (guest != null)
+                throw new GuestException(string.Format("Guest with username {0} already exists", username));
+            _repository.Insert(new Domain.Guest
+            {
+                Username = username,
+                DisplayFullName = false
+            });
+            _repository.Commit();
+        }
+
+        public void UpdateProfile(Domain.Guest profileData)
 	    {
 			if (profileData == null)
 				throw new ArgumentNullException("profileData");

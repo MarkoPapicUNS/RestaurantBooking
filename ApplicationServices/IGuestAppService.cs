@@ -12,6 +12,7 @@ namespace ApplicationServices
     {
         IGuestDto GetGuest(string username, string guestUsername);
         IEnumerable<FriendDisplayDto> GetGuests(string username);
+        ActionResultDto AddGuest(string username);
 	    ActionResultDto UpdateProfile(ProfileModel profileModel);
     }
 }

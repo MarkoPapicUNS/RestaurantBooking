@@ -10,6 +10,7 @@ namespace Guest.Services
     {
         IQueryable<Domain.Guest> GetGuests(string username);
         Domain.Guest GetGuest(string username);
+        void AddGuest(string username);
 	    void UpdateProfile(Domain.Guest profileData);
         IQueryable<Domain.Guest> GetFriends(string username);
         IQueryable<Domain.Guest> GetFriendRequests(string username);
