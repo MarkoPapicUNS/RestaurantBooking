@@ -51,6 +51,7 @@
     <Compile Include="FriendshipRepository.cs" />
     <Compile Include="GuestRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
@@ -68,6 +69,14 @@
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5c1c69a0-a3e7-4a88-84dc-eecb67b8a008}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Domain\System.Domain.csproj">
+      <Project>{AA3A97DB-073C-4EEF-AF12-24054FFE49DF}</Project>
+      <Name>System.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Services\System.Services.csproj">
+      <Project>{80D28333-8727-401E-81AB-EC7A888D7D8B}</Project>
+      <Name>System.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

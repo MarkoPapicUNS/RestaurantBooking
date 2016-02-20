@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Restaurant.Domain;
 
 namespace Restaurant.Repositories
 {
@@ -20,12 +21,17 @@ namespace Restaurant.Repositories
 
         public IQueryable<Domain.Restaurant> All()
         {
-            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables);
+            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables).Include(r => r.Menu).Include(r => r.Managers);
         }
 
         public Restaurant.Domain.Restaurant Find(string id)
         {
-            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables).FirstOrDefault(r => r.RestaurantId == id);
+            return _context.Restaurants.Include(r => r.Reservations).Include(r => r.Ratings).Include(r => r.Tables).Include(r => r.Menu).Include(r => r.Managers).FirstOrDefault(r => r.RestaurantId == id);
+        }
+
+        public void RemoveManager(RestaurantManager manager)
+        {
+            _context.RestaurantManagers.Remove(manager);
         }
 
         public void Insert(Restaurant.Domain.Restaurant item)

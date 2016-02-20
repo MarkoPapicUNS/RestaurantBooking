@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Domain;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace DataAccess
 {
     public class RestaurantBookingContext : DbContext
     {
+        public DbSet<SystemManager> SystemManagers { get; set; }
         public DbSet<Guest.Domain.Guest> Guests { get; set; }
         public DbSet<Friendship> Frendships { get; set; }
         public DbSet<Guest.Domain.GuestReservation> GuestReservations { get; set; }
@@ -22,6 +24,7 @@ namespace DataAccess
         public DbSet<Meal> RestaurantMeals { get; set; }
         public DbSet<GuestRating> GuestRatings { get; set; }
         public DbSet<RestaurantRating> RestaurantRatings { get; set; }
+        public DbSet<RestaurantManager> RestaurantManagers { get; set; }
         public DbSet<Visit> Visits { get; set; }
         public DbSet<Log> Logs { get; set; }
 
@@ -34,6 +37,7 @@ namespace DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Configurations.Add(new SystemManagerMap());
             modelBuilder.Configurations.Add(new GuestMap());
             modelBuilder.Configurations.Add(new FriendshipMap());
             modelBuilder.Configurations.Add(new GuestReservationMap());
@@ -44,6 +48,7 @@ namespace DataAccess
 	        modelBuilder.Configurations.Add(new ReservationInvitationMap());
 	        modelBuilder.Configurations.Add(new GuestRatingMap());
 	        modelBuilder.Configurations.Add(new RestaurantRatingMap());
+	        modelBuilder.Configurations.Add(new RestaurantManagerMap());
 	        modelBuilder.Configurations.Add(new VisitMap());
             modelBuilder.Configurations.Add(new LogMap());
         }

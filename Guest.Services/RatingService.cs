@@ -36,7 +36,7 @@ namespace Guest.Services
                 //var completeReservations = guests.SelectMany(g => g.Reservations).Where(r => r.DidShowUp && DateTime.Now >= r.Time + TimeSpan.FromHours(r.Hours));
                 //var ratings = guests.SelectMany(g => g.Ratings);
                 //var reservationsWithoutRating = completeReservations.Where(r => !ratings.Any(r2 => r2.GuestUsername == r.GuestUsername && r2.RestaurantId == r.RestaurantId));
-
+                var added = false;
                 foreach (var guest in guests)
                 {
                     if (guest.Ratings == null)

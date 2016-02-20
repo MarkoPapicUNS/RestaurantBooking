@@ -20,7 +20,7 @@ namespace RestaurantBooking.API.Controllers
         }
 
 		[Authorize(Roles="Guest")]
-        [Route("api/guest/guest/{guestUsername?}")]
+        [Route("api/guest/guest/{guestUsername?}", Name = "GuestRoute")]
         public IHttpActionResult GetGuest(string guestUsername = null)
         {
             var username = User.Identity.Name;
@@ -43,6 +43,25 @@ namespace RestaurantBooking.API.Controllers
         {
             var username = User.Identity.Name;
             return Ok(_appService.GetGuests(username));
+        }
+
+        [Route("api/guest/add")]
+        public IHttpActionResult AddGuest([FromBody] string username)
+        {
+            if (username != User.Identity.Name)
+                return Unauthorized();
+            
+            try
+            {
+                var result = _appService.AddGuest(username);
+                if (result.IsSuccess)
+                    return Created(Url.Link("GuestRoute", new { guestUsername = username }), result.Message);
+                return BadRequest(result.Message);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
 		[Route("api/guest/updateprofile")]

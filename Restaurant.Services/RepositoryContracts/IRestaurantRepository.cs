@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Restaurant.Domain;
 
 namespace Restaurant.Services.RepositoryContracts
 {
     public interface IRestaurantRepository : IRepository<Domain.Restaurant>
     {
         Domain.Restaurant Find(string id);
+        void RemoveManager(RestaurantManager manager);
     }
 }

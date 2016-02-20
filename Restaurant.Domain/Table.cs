@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Restaurant.Domain
 {
@@ -14,6 +15,7 @@ namespace Restaurant.Domain
         public TablePosition Position { get; set; }
 
         //for Entity Framework
+        [JsonIgnore]
         public virtual Restaurant Restaurant { get; set; }
     }
 }

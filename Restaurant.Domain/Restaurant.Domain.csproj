@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Meal.cs" />
+    <Compile Include="RestaurantManager.cs" />
     <Compile Include="RestaurantRating.cs" />
     <Compile Include="RestaurantReservation.cs" />
     <Compile Include="Restaurant.cs" />

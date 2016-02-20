@@ -111,6 +111,10 @@
       <Project>{5C1C69A0-A3E7-4A88-84DC-EECB67B8A008}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\System.Services\System.Services.csproj">
+      <Project>{80D28333-8727-401E-81AB-EC7A888D7D8B}</Project>
+      <Name>System.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

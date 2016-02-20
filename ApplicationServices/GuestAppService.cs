@@ -57,7 +57,7 @@ namespace ApplicationServices
             {
                 _guestService.AddGuest(username);
                 result.IsSuccess = true;
-                result.Message = string.Format("Guest {0} succesfully registered!");
+                result.Message = string.Format("Guest {0} succesfully registered!", username);
                 _logger.Log(LogMessageType.Notification, string.Format("Guest {0} successfully registered!", username));
             }
             catch (GuestException ge)
@@ -72,6 +72,7 @@ namespace ApplicationServices
                 result.Message = "Unable to process request";
                 _logger.Log(LogMessageType.Error, e.Message);
             }
+            return result;
         }
 
         public ActionResultDto UpdateProfile(ProfileModel profileModel)

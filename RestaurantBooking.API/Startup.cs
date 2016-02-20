@@ -28,7 +28,7 @@ namespace RestaurantBooking.API
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
 
-            //from here
+            //timer
             IRatingService ratingService = InversionOfControlManager.Resolve<IRatingService>();
             Timer = new Timer((x) => ratingService.CreateRatingsFromCompletedReservations(), null, 0, 60000);
         }

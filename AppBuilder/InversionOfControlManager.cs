@@ -1,4 +1,6 @@
-﻿using System.Web.Http.Dependencies;
+﻿using System.Services;
+using System.Services.RepositoryContracts;
+using System.Web.Http.Dependencies;
 using ApplicationServices;
 using ApplicationServices.Adapters;
 using Guest.Repositories;
@@ -10,6 +12,7 @@ using Restaurant.Repositories;
 using Restaurant.Services.RepositoryContracts;
 using Shared;
 using Logger;
+using Restaurant.Services;
 
 namespace AppBuilder
 {
@@ -40,9 +43,16 @@ namespace AppBuilder
             _container.RegisterType<IReservationService, ReservationService>();
             _container.RegisterType<IRatingAppService, RatingAppService>();
             _container.RegisterType<IRatingService, RatingService>();
+            _container.RegisterType<IRestaurantAppService, RestaurantAppService>();
+            _container.RegisterType<IRestaurantService, RestaurantService>();
+            _container.RegisterType<ISystemAppService, SystemAppService>();
+            _container.RegisterType<ISystemService, SystemService>();
+            _container.RegisterType<IRestaurantAdapter, RestaurantAdapter>();
+            _container.RegisterType<ISystemAdapter, SystemAdapter>();
             _container.RegisterType<IGuestRepository, GuestRepository>();
             _container.RegisterType<IFriendshipRepository, FriendshipRepository>();
             _container.RegisterType<IRestaurantRepository, RestaurantRepository>();
+            _container.RegisterType<ISystemRepository, SystemRepository>();
             _container.RegisterType<ILogger, DbLoger>();
 	    }
 

@@ -43,7 +43,8 @@ namespace Guest.Services
             _repository.Insert(new Domain.Guest
             {
                 Username = username,
-                DisplayFullName = false
+                DisplayFullName = false,
+                Address = new Address()
             });
             _repository.Commit();
         }
