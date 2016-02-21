@@ -62,8 +62,9 @@ namespace RestaurantBooking.API.Controllers
             return BadRequest(result.Message);
         }
 
-        [Route("api/friendship/removefriend")]
-        public IHttpActionResult RemoveFriend([FromBody] string friendUsername)
+        [HttpDelete]
+        [Route("api/friendship/removefriend/friendUsername")]
+        public IHttpActionResult RemoveFriend(string friendUsername)
         {
             if (string.IsNullOrEmpty(friendUsername))
                 return BadRequest("Invalid request");

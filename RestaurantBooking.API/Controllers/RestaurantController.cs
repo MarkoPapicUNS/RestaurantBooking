@@ -67,7 +67,8 @@ namespace RestaurantBooking.API.Controllers
             }
         }
 
-        [Route("api/restaurant/remove")]
+        [HttpDelete]
+        [Route("api/restaurant/remove/{restaurantId}")]
         public IHttpActionResult RemoveRestaurant(string restaurantId)
         {
             if (string.IsNullOrEmpty(restaurantId))
@@ -107,8 +108,9 @@ namespace RestaurantBooking.API.Controllers
             }
         }
 
-        [Route("api/restaurant/removemanager")]
-        public IHttpActionResult RemoveRestaurantManager([FromBody] string username)
+        [HttpDelete]
+        [Route("api/restaurant/removemanager/{username}")]
+        public IHttpActionResult RemoveRestaurantManager(string username)
         {
             if (string.IsNullOrEmpty(username))
                 return BadRequest("Invalid request");

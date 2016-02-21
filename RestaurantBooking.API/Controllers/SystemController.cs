@@ -64,8 +64,9 @@ namespace RestaurantBooking.API.Controllers
             }
         }
 
-        [Route("api/system/remove")]
-        public IHttpActionResult RemoveSystemManager([FromBody] string username)
+        [HttpDelete]
+        [Route("api/system/remove/{username}")]
+        public IHttpActionResult RemoveSystemManager(string username)
         {
             if (string.IsNullOrEmpty(username))
                 return BadRequest("Invalid request");
