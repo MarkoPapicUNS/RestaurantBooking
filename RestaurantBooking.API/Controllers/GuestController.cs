@@ -88,5 +88,15 @@ namespace RestaurantBooking.API.Controllers
 			    return InternalServerError(e);
 		    }
 		}
+
+        [Route("api/guest/friends")]
+        public IHttpActionResult GetFriends()
+        {
+            var username = User.Identity.Name;
+            var friends = _appService.GetFriends(username);
+            if (friends == null)
+                return BadRequest();
+            return Ok(friends);
+        }
     }
 }

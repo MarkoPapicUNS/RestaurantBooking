@@ -76,7 +76,7 @@ namespace ApplicationServices
                 result = new ActionResultDto
                 {
                     IsSuccess = true,
-                    Message = string.Format("Friend request from {0} accepted!", recipientUsername)
+                    Message = string.Format("Friend request from {0} accepted!", senderUsername)
                 };
                 //Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
                 _logger.Log(LogMessageType.Notification,

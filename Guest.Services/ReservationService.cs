@@ -29,8 +29,8 @@ namespace Guest.Services
             var guest = _guestRepository.Find(username);
 			if (guest == null)
 				throw new ReservationException(string.Format("User {0} doesn't exist.", username));
-            //if (time < DateTime.Now + TimeSpan.FromHours(2))
-               // throw new ReservationException("Reservations can only be made 2 hours before arrival.");
+            if (time < DateTime.Now + TimeSpan.FromHours(2))
+                throw new ReservationException("Reservations can only be made 2 hours before arrival.");
 			if (guest.Reservations.Any(r => DoReservationsOverlap(r.Time, r.Hours, time, hours)))
 				throw new ReservationException("Reservation overlaps with some of your reservations.");
 			var restaurant = _restaurantRepository.Find(restaurantId);

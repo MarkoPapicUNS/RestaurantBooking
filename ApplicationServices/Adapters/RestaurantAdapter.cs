@@ -16,6 +16,7 @@ namespace ApplicationServices.Adapters
                 throw new ArgumentNullException("restaurant");
 
             var yourRating = restaurant.Ratings.FirstOrDefault(r => r.GuestUsername == username);
+            var time = DateTime.Now;
 
             var restaurantDto = new RestaurantDto
             {
@@ -26,7 +27,9 @@ namespace ApplicationServices.Adapters
                 Tables = restaurant.Tables,
                 Rating = (double)restaurant.Ratings.Sum(x => x.Grade) / (double)restaurant.Ratings.Count(),
                 YourRating = yourRating == null ? 0 : yourRating.Grade,
-                Ratings = restaurant.Ratings
+                Ratings = restaurant.Ratings,
+                ReservedTables = restaurant.Reservations.Where(r => r.Time < time && time < r.Time + TimeSpan.FromHours(r.Hours)).Select(r => r.TableNumber).ToList(),
+                Reservations = restaurant.Reservations.Where(r => r.Time + TimeSpan.FromMinutes(31) > DateTime.Now).ToList()
             };
             return restaurantDto;
         }

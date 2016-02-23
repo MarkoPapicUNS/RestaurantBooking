@@ -26,7 +26,14 @@ namespace Logger
                 Time = DateTime.Now
             };
             _context.Logs.Add(logMessage);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                //do nothing
+            }
         }
     }
 }

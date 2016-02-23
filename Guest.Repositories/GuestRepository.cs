@@ -27,7 +27,8 @@ namespace Guest.Repositories
                     .Include(g2 => g2.RequestedFriendships)
                     .Include(g => g.Reservations)
                     .Include(g => g.SentReservationInvitations)
-                    .Include(g => g.ReservationInvitations);
+                    .Include(g => g.ReservationInvitations)
+                    .Include(g => g.Ratings);
         }
 
         public Domain.Guest Find(string id) //I return single quest as IQueryable because of later includes

@@ -102,5 +102,21 @@ namespace ApplicationServices
             }
 			return result;
 	    }
+
+        public IEnumerable<FriendDisplayDto> GetFriends(string username)
+        {
+            IEnumerable<FriendDisplayDto> friendsDtos;
+            try
+            {
+                var friends = _guestService.GetFriends(username).ToArray();
+                friendsDtos = friends.Select(f => _adapter.AdaptGuestDisplay(f));
+            }
+            catch (Exception e)
+            {
+
+                friendsDtos = null;
+            }
+            return friendsDtos;
+        }
     }
 }

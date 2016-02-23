@@ -30,7 +30,7 @@ namespace Guest.Services
             try
             {
                 //Task.Run(() => _logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings"));
-                _logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings");
+                //_logger.Log(LogMessageType.Notification, "Started looking up for completed reservations and creating ratings");
 
                 var guests = _guestRepository.All();
                 //var completeReservations = guests.SelectMany(g => g.Reservations).Where(r => r.DidShowUp && DateTime.Now >= r.Time + TimeSpan.FromHours(r.Hours));
@@ -39,10 +39,10 @@ namespace Guest.Services
                 var added = false;
                 foreach (var guest in guests)
                 {
-                    if (guest.Ratings == null)
+                    /*if (guest.Ratings == null)
                         guest.Ratings = new List<GuestRating>();
                     if (guest.Visits == null)
-                        guest.Visits = new List<Visit>();
+                        guest.Visits = new List<Visit>();*/
                     var completeReservations = guest.Reservations.Where(r => r.DidShowUp && DateTime.Now >= r.Time + TimeSpan.FromHours(r.Hours));
                     var reservationsWithoutRating = completeReservations.Where(r => !guest.Ratings.Any(r2 => r2.GuestUsername == r.GuestUsername && r2.RestaurantId == r.RestaurantId));
                     foreach (var reservation in reservationsWithoutRating)
@@ -51,8 +51,8 @@ namespace Guest.Services
                         {
                             foreach (var invitation in reservation.Invitations)
                             {
-                                if (invitation.InvitedGuest.Ratings == null)
-                                    invitation.InvitedGuest.Ratings = new List<GuestRating>();
+                                /*if (invitation.InvitedGuest.Ratings == null)
+                                    invitation.InvitedGuest.Ratings = new List<GuestRating>();*/
                                 if (!invitation.InvitedGuest.Ratings.Any(r2 => r2.GuestUsername == reservation.GuestUsername && reservation.RestaurantId == reservation.RestaurantId))
                                 {
                                     var invitedGuestRating = new GuestRating
@@ -99,7 +99,7 @@ namespace Guest.Services
                 }
                 _guestRepository.Commit();
                 //Task.Run(() => _logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings"));
-                _logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings");
+                //_logger.Log(LogMessageType.Notification, "Finished looking up for completed reservations and creating ratings");
 
             }
             catch (Exception e)
