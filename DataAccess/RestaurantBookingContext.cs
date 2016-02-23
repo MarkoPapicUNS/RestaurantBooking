@@ -29,7 +29,7 @@ namespace DataAccess
         public DbSet<Log> Logs { get; set; }
 
         public RestaurantBookingContext()
-            //: base("RestaurantBookingContext")
+            : base("RestaurantBookingContext")
         {
             
         }

@@ -24,7 +24,8 @@ namespace Guest.Services
         {
 			//Task.Run(() => _logger.Log(LogMessageType.Notification, "Started retrieving all guests"));
 	        _logger.Log(LogMessageType.Notification, "Started retrieving all guests");
-			return _repository.All().Where(g => g.Username != username);
+			var guests = _repository.All().Where(g => g.Username != username);
+			return guests;
         }
 
         public Domain.Guest GetGuest(string username)
@@ -80,7 +81,7 @@ namespace Guest.Services
             return friends;
         }
 
-        public IQueryable<Domain.Guest> GetFriendRequests(string username)
+        public IQueryable<Domain.Guest> GetSentFriendRequests(string username)
         {
             if (username == null)
                 throw new ArgumentNullException("username");
@@ -94,7 +95,7 @@ namespace Guest.Services
 
         }
 
-        public IQueryable<Domain.Guest> GetSentFriendRequests(string username)
+        public IQueryable<Domain.Guest> GetFriendRequests(string username)
         {
             if (username == null)
                 throw new ArgumentNullException("username");
