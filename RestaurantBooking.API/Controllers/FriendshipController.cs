@@ -63,7 +63,7 @@ namespace RestaurantBooking.API.Controllers
         }
 
         [HttpDelete]
-        [Route("api/friendship/removefriend/friendUsername")]
+        [Route("api/friendship/removefriend/{friendUsername}")]
         public IHttpActionResult RemoveFriend(string friendUsername)
         {
             if (string.IsNullOrEmpty(friendUsername))

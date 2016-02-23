@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Guest.Domain\Guest.Domain.csproj">
-      <Project>{F501F383-D2CD-4A0C-8406-561B5B118B7E}</Project>
+      <Project>{f501f383-d2cd-4a0c-8406-561b5b118b7e}</Project>
       <Name>Guest.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Guest.Services\Guest.Services.csproj">
@@ -89,7 +89,7 @@
       <Name>Restaurant.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{5C1C69A0-A3E7-4A88-84DC-EECB67B8A008}</Project>
+      <Project>{5c1c69a0-a3e7-4a88-84dc-eecb67b8a008}</Project>
       <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\System.Domain\System.Domain.csproj">

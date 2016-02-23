@@ -71,11 +71,11 @@ namespace ApplicationServices.Adapters
             };
         }
 
-        public StrangerGuestDto AdaptStrangerGuest(Guest.Domain.Guest guest)
+        public StrangerGuestDto AdaptStrangerGuest(Guest.Domain.Guest guest, GuestRelation relation)
         {
             return new StrangerGuestDto
             {
-                Relation = GuestRelation.Stranger,
+                Relation = relation,
                 Username = guest.Username,
                 DisplayName =
                     guest.DisplayFullName ? string.Format("{0} {1}", guest.FirstName, guest.LastName) : guest.Username,

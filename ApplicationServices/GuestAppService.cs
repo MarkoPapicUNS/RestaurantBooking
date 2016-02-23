@@ -32,16 +32,22 @@ namespace ApplicationServices
             if (guest == null)
                 return null;
             var guestFriends = _guestService.GetFriends(guestUsername);
-            if (username == guest.Username)
+			var friendRequests = _guestService.GetFriendRequests(guestUsername);
+			var sentFriendRequests = _guestService.GetSentFriendRequests(guestUsername);
+			if (username == guest.Username)
             {
-                var friendRequests = _guestService.GetFriendRequests(guestUsername);
-                var sentFriendRequests = _guestService.GetSentFriendRequests(guestUsername);
+//                var friendRequests = _guestService.GetFriendRequests(guestUsername);
+//                var sentFriendRequests = _guestService.GetSentFriendRequests(guestUsername);
                 return _adapter.AdaptMeGuest(guest, guestFriends, friendRequests, sentFriendRequests);
             }
             else if (guestFriends.Any(gf => gf.Username == username))
                 return _adapter.AdaptFriendGuest(guest, guestFriends);
+			else if (sentFriendRequests.Any(fr => fr.Username == username))
+				return _adapter.AdaptStrangerGuest(guest, GuestRelation.RequestReceived);
+			else if (friendRequests.Any(fr => fr.Username == username))
+				return _adapter.AdaptStrangerGuest(guest, GuestRelation.RequestSent);
             else
-                return _adapter.AdaptStrangerGuest(guest);
+                return _adapter.AdaptStrangerGuest(guest, GuestRelation.Stranger);
         }
 
         public IEnumerable<FriendDisplayDto> GetGuests(string username)

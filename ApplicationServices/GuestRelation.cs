@@ -10,6 +10,8 @@ namespace ApplicationServices
     {
         Me = 0,
         Friend,
+		RequestReceived,
+		RequestSent,
         Stranger
     }
 }
