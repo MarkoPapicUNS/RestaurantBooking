@@ -52,7 +52,7 @@ namespace ApplicationServices
 		    {
 			    _reservationService.InviteFriend(username, reservationId, friendUsername);
 			    result.IsSuccess = true;
-			    result.Message = string.Format("{0} invited to join you.", friendUsername);
+			    result.Message = string.Format("{0} successfully invited.", friendUsername);
 		    }
 			catch (ReservationException re)
 			{
