@@ -66,6 +66,8 @@ namespace ApplicationServices.Adapters
                 FriendRequests = friendRequests.Select(fr => AdaptGuestDisplay(fr)),
                 SentFriendRequests = sentFriendRequests.Select(sfr => AdaptGuestDisplay(sfr)),
 				Reservations = guest.Reservations.ToArray(),
+				ReservationInvitations = guest.ReservationInvitations,
+				SentReservationInvitations = guest.SentReservationInvitations,
                 Ratings = guest.Ratings.ToArray(),
                 Visits = guest.Visits.ToArray()
             };

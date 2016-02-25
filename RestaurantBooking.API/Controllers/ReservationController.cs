@@ -57,5 +57,27 @@ namespace RestaurantBooking.API.Controllers
 				return Created(Url.Link("ReservationInvitationRoute", new { reservationid = reservationInvitation.ReservationId, friendid = reservationInvitation.InvitedGuestUsername }), result.Message);
 			return BadRequest(result.Message);
 		}
-    }
+
+		[Route("api/reservation/acceptinvitation")]
+		public IHttpActionResult AcceptInvitation([FromBody]int reservationId)
+		{
+			var username = User.Identity.Name;
+			var result = _appService.AcceptInvitation(username, reservationId);
+			if (result.IsSuccess)
+				return Created(Url.Link("ReservationInvitationRoute", new {reservationid = reservationId, friendid = username}),
+					result.Message);
+			return BadRequest(result.Message);
+		}
+
+		[Route("api/reservation/declineinvitation")]
+		public IHttpActionResult DeclineInvitation([FromBody]int reservationId)
+		{
+			var username = User.Identity.Name;
+			var result = _appService.RejectInvitation(username, reservationId);
+			if (result.IsSuccess)
+				return Created(Url.Link("ReservationInvitationRoute", new { reservationid = reservationId, friendid = username }),
+					result.Message);
+			return BadRequest(result.Message);
+		}
+	}
 }

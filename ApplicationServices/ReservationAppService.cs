@@ -66,5 +66,63 @@ namespace ApplicationServices
 			}
 			return result;
 		}
+
+	    public ActionResultDto AcceptInvitation(string username, int reservationId)
+	    {
+			ActionResultDto result;
+			try
+			{
+				_reservationService.AcceptReservationInvitation(username, reservationId);
+				result = new ActionResultDto
+				{
+					IsSuccess = true,
+					Message = string.Format("Reservation invitation from {0} accepted!", username)
+				};
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
+				//_logger.Log(LogMessageType.Notification,
+					//string.Format("Friend request from {0} to {1} accepted", senderUsername, recipientUsername));
+
+			}
+			catch (Exception e)
+			{
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
+				//_logger.Log(LogMessageType.Notification, e.Message);
+				result = new ActionResultDto
+				{
+					IsSuccess = false,
+					Message = "Unable to perform this request."
+				};
+			}
+			return result;
+		}
+
+	    public ActionResultDto RejectInvitation(string username, int reservationId)
+	    {
+			ActionResultDto result;
+			try
+			{
+				_reservationService.RejectReservationInvitation(username, reservationId);
+				result = new ActionResultDto
+				{
+					IsSuccess = true,
+					Message = string.Format("Reservation invitation from {0} declined!", username)
+				};
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, string.Format("{0} removed successfully from {1}'s friends", friendUsername, username)));
+				//_logger.Log(LogMessageType.Notification,
+				//string.Format("Friend request from {0} to {1} accepted", senderUsername, recipientUsername));
+
+			}
+			catch (Exception e)
+			{
+				//Task.Run(() => _logger.Log(LogMessageType.Notification, e.Message));
+				//_logger.Log(LogMessageType.Notification, e.Message);
+				result = new ActionResultDto
+				{
+					IsSuccess = false,
+					Message = "Unable to perform this request."
+				};
+			}
+			return result;
+		}
     }
 }

@@ -91,10 +91,17 @@ namespace Guest.Services
 			var friend = _guestRepository.Find(friendUsername);
 			if (friend == null)
 				throw new ReservationException(string.Format("User {0} doesn't exist.", friendUsername));
+			if (friend.ReservationInvitations.Any(r => r.GuestReservationId == reservationId))
+				throw new ReservationException(string.Format("Friend {0} is already invited to this reservation", friendUsername));
 			friend.ReservationInvitations.Add(new ReservationInvitation
 			{
 				GuestReservationId = reservation.ReservationId,
 				InvitedGuestUsername = friendUsername,
+				Status = ReservationInvitationStatus.InvitationPending,
+				InvitorUsername = username,
+				InvitorDisplayName = guest.DisplayFullName ? string.Format("{0} {1}", guest.FirstName, guest.LastName) : guest.Username,
+				RestaurantId = reservation.RestaurantId,
+				RestaurantName = reservation.RestaurantName
 				/*RestaurantId = restaurantId,
 				GuestDisplayName = guest.DisplayFullName ? string.Format("{0} {1}", guest.FirstName, guest.LastName) : username,
 				InvitedGuestDisplayName = friend.DisplayFullName ? string.Format("{0} {1}", friend.FirstName, friend.LastName) : friendUsername,
@@ -105,7 +112,31 @@ namespace Guest.Services
 			_guestRepository.Commit();
 		}
 
-        private bool DoReservationsOverlap(DateTime time1, double hours1, DateTime time2, double hours2)
+	    public void AcceptReservationInvitation(string username, int reservationId)
+	    {
+		    var guest = _guestRepository.Find(username);
+			if (guest == null)
+				throw new ReservationException(string.Format("User {0} doesn't exist.", username));
+		    var invitation = guest.ReservationInvitations.FirstOrDefault(r => r.GuestReservationId == reservationId);
+			if (invitation == null)
+				throw new ReservationException("Invitaion doesn't exist.");
+			invitation.Status = ReservationInvitationStatus.Accepted;
+			_guestRepository.Commit();
+		}
+
+	    public void RejectReservationInvitation(string username, int reservationId)
+	    {
+			var guest = _guestRepository.Find(username);
+			if (guest == null)
+				throw new ReservationException(string.Format("User {0} doesn't exist.", username));
+			var invitation = guest.ReservationInvitations.FirstOrDefault(r => r.GuestReservationId == reservationId);
+			if (invitation == null)
+				throw new ReservationException("Invitaion doesn't exist.");
+		    guest.ReservationInvitations.Remove(invitation);
+			_guestRepository.Commit();
+	    }
+
+	    private bool DoReservationsOverlap(DateTime time1, double hours1, DateTime time2, double hours2)
 	    {
 		    if (time1 < time2 && time2 < time1 + TimeSpan.FromHours(hours1))
 			    return true;

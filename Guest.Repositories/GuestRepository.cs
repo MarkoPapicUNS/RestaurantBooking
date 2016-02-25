@@ -28,7 +28,8 @@ namespace Guest.Repositories
                     .Include(g => g.Reservations)
                     .Include(g => g.SentReservationInvitations)
                     .Include(g => g.ReservationInvitations)
-                    .Include(g => g.Ratings);
+                    .Include(g => g.Ratings)
+					.Include(g => g.Visits);
         }
 
         public Domain.Guest Find(string id) //I return single quest as IQueryable because of later includes
@@ -36,7 +37,6 @@ namespace Guest.Repositories
 	        return
 		        _context.Guests.Include(g => g.ReceivedFriendships)
 			        .Include(g => g.RequestedFriendships)
-			        .Include(g => g.Reservations)
 			        .Include(g => g.Reservations)
 			        .Include(g => g.SentReservationInvitations)
 			        .Include(g => g.ReservationInvitations)

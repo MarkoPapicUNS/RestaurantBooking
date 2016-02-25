@@ -14,6 +14,11 @@ namespace Guest.Domain
 		public DateTime Time { get; set; }*/
 		public int GuestReservationId { get; set; }
 		public string InvitedGuestUsername { get; set; }
+		public string InvitorUsername { get; set; }
+		public string InvitorDisplayName { get; set; }
+		public string RestaurantName { get; set; }
+		public string RestaurantId { get; set; }
+		public ReservationInvitationStatus Status { get; set; }
 
 		//for EntityFramework
 		[JsonIgnore]

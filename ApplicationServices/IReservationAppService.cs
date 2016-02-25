@@ -12,5 +12,7 @@ namespace ApplicationServices
         ActionResultDto MakeReservation(string username, string restaurantId, int tableNumber, DateTime time, double hours);
         ActionResultDto CancelReservation(string username, string restaurantId, int tableNumber, DateTime time);
 		ActionResultDto InviteFriend(string username, int reservationId, string friendUsername);
+		ActionResultDto AcceptInvitation(string username, int reservationId);
+		ActionResultDto RejectInvitation(string username, int reservationId);
 	}
 }
