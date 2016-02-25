@@ -96,9 +96,18 @@ namespace ApplicationServices
             return result;
         }
 
-        public RestaurantManager GetRestaurantManager(string restaurantManagerUsername)
+        public RestaurantManagerDto GetRestaurantManager(string restaurantManagerUsername)
         {
-            throw new NotImplementedException();
+            Restaurant.Domain.RestaurantManager manager;
+            try
+            {
+                manager = _service.GetRestaurantManager(restaurantManagerUsername);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return _adapter.AdaptRestaurantManagerDto(manager);
         }
 
         public ActionResultDto AddRestaurantManager(string restaurantManagerUsername, string restaurantId)

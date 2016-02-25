@@ -80,16 +80,16 @@ namespace RestaurantBooking.API.Controllers
             return BadRequest("Invalid request");
         }
 
-        [Route("api/restaurant/manager/{managerusername}", Name = "RestaurantManagerRoute")]
-        public IHttpActionResult GetRestaurantManger(string managerUsername)
+        [Route("api/restaurant/manager/{managerusername?}", Name = "RestaurantManagerRoute")]
+        public IHttpActionResult GetRestaurantManger(string managerUsername = null)
         {
             if (string.IsNullOrEmpty(managerUsername))
                 return BadRequest("Invalid request");
 
-            var result = _appService.RemoveRestaurantManager(managerUsername);
-            if (result.IsSuccess)
-                return Ok(result.Message);
-            return BadRequest("Invalid request");
+            var manager = _appService.GetRestaurantManager(managerUsername);
+            if (manager == null)
+                return NotFound();
+            return Ok(manager);
         }
 
         [Route("api/restaurant/addmanager")]

@@ -14,7 +14,7 @@ namespace ApplicationServices
         IEnumerable<RestaurantDto> GetRestaurants(string username);
         ActionResultDto AddRestaurant(string restaurantId);
         ActionResultDto RemoveRestaurant(string restaurantId);
-        RestaurantManager GetRestaurantManager(string restaurantManagerUsername);
+        RestaurantManagerDto GetRestaurantManager(string restaurantManagerUsername);
         ActionResultDto AddRestaurantManager(string restaurantManagerUsername, string restaurantId);
         ActionResultDto RemoveRestaurantManager(string restaurantManagerUsername);
     }
