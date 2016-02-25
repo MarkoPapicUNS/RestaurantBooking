@@ -17,5 +17,7 @@ namespace ApplicationServices
         RestaurantManagerDto GetRestaurantManager(string restaurantManagerUsername);
         ActionResultDto AddRestaurantManager(string restaurantManagerUsername, string restaurantId);
         ActionResultDto RemoveRestaurantManager(string restaurantManagerUsername);
+        ActionResultDto AddMeal(string restaurantId, string mealName, string mealDescription, decimal mealPrice);
+        ActionResultDto RemoveMeal(string restaurantId, string mealName);
     }
 }

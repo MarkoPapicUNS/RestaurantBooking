@@ -133,6 +133,7 @@
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Models\MealDto.cs" />
     <Compile Include="Models\RatingDto.cs" />
     <Compile Include="Models\ReservationDto.cs" />
     <Compile Include="Models\ReservationInvitationDto.cs" />

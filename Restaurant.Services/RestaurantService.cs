@@ -88,5 +88,32 @@ namespace Restaurant.Services
                 _restaurantRepository.RemoveManager(restaurantManager);
             _restaurantRepository.Commit();
         }
+
+        public void AddMeal(string restaurantId, string mealName, string mealDescription, decimal mealPrice)
+        {
+            var restaurant = _restaurantRepository.Find(restaurantId);
+            if (restaurant == null)
+                throw new RestaurantException("Restaurant doesn't exist");
+            if (restaurant.Menu.Any(m => m.Name == mealName))
+                throw new RestaurantException("Meal with that name already exists");
+            restaurant.Menu.Add(new Meal {
+                Name = mealName,
+                Description = mealDescription,
+                Price = mealPrice
+            });
+            _restaurantRepository.Commit();
+        }
+
+        public void RemoveMeal(string restaurantId, string mealName)
+        {
+            var restaurant = _restaurantRepository.Find(restaurantId);
+            if (restaurant == null)
+                throw new RestaurantException("Restaurant doesn't exist");
+            var meal = restaurant.Menu.FirstOrDefault(m => m.Name == mealName);
+            if (meal == null)
+                throw new RestaurantException(string.Format("Meal {0} doesn't exist", mealName));
+            restaurant.Menu.Remove(meal);
+            _restaurantRepository.Commit();
+        }
     }
 }

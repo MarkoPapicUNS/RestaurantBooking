@@ -161,5 +161,53 @@ namespace ApplicationServices
             }
             return result;
         }
+
+        public ActionResultDto AddMeal(string restaurantId, string mealName, string mealDescription, decimal mealPrice)
+        {
+            ActionResultDto result = new ActionResultDto();
+            try
+            {
+                _service.AddMeal(restaurantId, mealName, mealDescription, mealPrice);
+                result.IsSuccess = true;
+                result.Message = string.Format("Meal {0} added successfully!", mealName);
+            }
+            catch (RestaurantException se)
+            {
+                _logger.Log(LogMessageType.Error, se.Message);
+                result.IsSuccess = false;
+                result.Message = se.Message;
+            }
+            catch (Exception e)
+            {
+                _logger.Log(LogMessageType.Error, e.Message);
+                result.IsSuccess = false;
+                result.Message = "Unable to process request";
+            }
+            return result;
+        }
+
+        public ActionResultDto RemoveMeal(string restaurantId, string mealName)
+        {
+            ActionResultDto result = new ActionResultDto();
+            try
+            {
+                _service.RemoveMeal(restaurantId, mealName);
+                result.IsSuccess = true;
+                result.Message = string.Format("Meal {0} removed successfully!", mealName);
+            }
+            catch (RestaurantException se)
+            {
+                _logger.Log(LogMessageType.Error, se.Message);
+                result.IsSuccess = false;
+                result.Message = se.Message;
+            }
+            catch (Exception e)
+            {
+                _logger.Log(LogMessageType.Error, e.Message);
+                result.IsSuccess = false;
+                result.Message = "Unable to process request";
+            }
+            return result;
+        }
     }
 }

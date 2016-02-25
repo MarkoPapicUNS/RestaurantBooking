@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using ApplicationServices;
 using ApplicationServices.Dtos;
+using RestaurantBooking.API.Models;
 
 namespace RestaurantBooking.API.Controllers
 {
@@ -83,10 +84,9 @@ namespace RestaurantBooking.API.Controllers
         [Route("api/restaurant/manager/{managerusername?}", Name = "RestaurantManagerRoute")]
         public IHttpActionResult GetRestaurantManger(string managerUsername = null)
         {
-            if (string.IsNullOrEmpty(managerUsername))
-                return BadRequest("Invalid request");
+            var username = managerUsername ?? User.Identity.Name;
 
-            var manager = _appService.GetRestaurantManager(managerUsername);
+            var manager = _appService.GetRestaurantManager(username);
             if (manager == null)
                 return NotFound();
             return Ok(manager);
@@ -116,6 +116,35 @@ namespace RestaurantBooking.API.Controllers
                 return BadRequest("Invalid request");
 
             var result = _appService.RemoveRestaurantManager(username);
+            if (result.IsSuccess)
+                return Ok(result.Message);
+            return BadRequest("Invalid request");
+        }
+
+        [Route("api/restaurant/addmeal")]
+        public IHttpActionResult AddMeal(MealDto meal)
+        {
+            try
+            {
+                var result = _appService.AddMeal(meal.RestaurantId, meal.Name, meal.Description, meal.Price);
+                if (result.IsSuccess)
+                    return Created(Url.Link("RestaurantManagerRoute", new { managerusername = "" }), result.Message);
+                return BadRequest(result.Message);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/restaurant/removemeal/{restaurantId}/{mealname}")]
+        public IHttpActionResult RemoveMeal(string restaurantId, string mealname)
+        {
+            if (string.IsNullOrEmpty(mealname))
+                return BadRequest("Invalid request");
+
+            var result = _appService.RemoveMeal(restaurantId, mealname);
             if (result.IsSuccess)
                 return Ok(result.Message);
             return BadRequest("Invalid request");

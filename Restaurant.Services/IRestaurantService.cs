@@ -16,5 +16,7 @@ namespace Restaurant.Services
         RestaurantManager GetRestaurantManager(string restaurantManagerUsername);
         void AddRestaurantManager(string restaurantManagerUsername, string restaurantId);
         void RemoveRestaurantManager(string restaurantManagerUsername);
+        void AddMeal(string restaurantId, string mealName, string mealDescription, decimal mealPrice);
+        void RemoveMeal(string restaurantId, string mealName);
     }
 }

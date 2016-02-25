@@ -41,6 +41,7 @@ namespace ApplicationServices.Adapters
 
             var restaurantManagerDto = new RestaurantManagerDto
             {
+                RestaurantId = restaurantManager.RestaurantId,
                 Username = restaurantManager.Username,
                 FirstName = restaurantManager.FirstName,
                 LastName = restaurantManager.LastName,
