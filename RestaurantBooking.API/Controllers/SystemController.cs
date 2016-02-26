@@ -48,7 +48,7 @@ namespace RestaurantBooking.API.Controllers
             }
         }
 
-        [Route("api/system/add/{username}")]
+        [Route("api/system/add")]
         public IHttpActionResult AddSystemManager([FromBody] string username)
         {
             try
