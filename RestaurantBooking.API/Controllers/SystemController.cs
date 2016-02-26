@@ -55,7 +55,7 @@ namespace RestaurantBooking.API.Controllers
             {
                 var result = _appService.AddSystemManager(username);
                 if (result.IsSuccess)
-                    return Created(Url.Link("SystemManagerRoute", new { managerUsername = username }), result.Message);
+                    return Created(Url.Link("SystemRoute", new { managerUsername = username }), result.Message);
                 return BadRequest(result.Message);
             }
             catch (Exception e)
