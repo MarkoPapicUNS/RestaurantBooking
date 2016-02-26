@@ -29,7 +29,8 @@ namespace ApplicationServices.Adapters
                 YourRating = yourRating == null ? 0 : yourRating.Grade,
                 Ratings = restaurant.Ratings,
                 ReservedTables = restaurant.Reservations.Where(r => r.Time < time && time < r.Time + TimeSpan.FromHours(r.Hours)).Select(r => r.TableNumber).ToList(),
-                Reservations = restaurant.Reservations.Where(r => r.Time + TimeSpan.FromMinutes(31) > DateTime.Now).ToList()
+                Reservations = restaurant.Reservations.Where(r => r.Time + TimeSpan.FromMinutes(31) > DateTime.Now).ToList(),
+				Managers = restaurant.Managers
             };
             return restaurantDto;
         }

@@ -19,5 +19,6 @@ namespace ApplicationServices.Dtos
         public List<int> ReservedTables { get; set; } 
         public List<RestaurantRating> Ratings { get; set; }
         public List<RestaurantReservation> Reservations { get; set; }
+        public List<RestaurantManager> Managers { get; set; }
     }
 }
